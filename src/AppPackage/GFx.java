@@ -8,6 +8,7 @@ package AppPackage;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.Random;
 
 /**
  *
@@ -281,6 +282,25 @@ public String printArray (Integer [][] array){
                 str.append(System.getProperty("line.separator"));
         }
         return str.toString();
+}
+
+public void fillProbability (int deler) {
+    // Fills with '1' with prob. 1/deler.
+    
+    Sent = new Integer [n][n];
+    for (Integer [] row : Sent){
+                Arrays.fill(row, 0);
+    }
+    
+    for (int i=0; i < Sent.length; i++){
+        for (int j=0; j < Sent[0].length; j++){
+            int val = new Random().nextInt(deler);
+  
+            if (val == 0){
+                Sent[i][j] = 1;
+            }
+        }
+    }
 }
 
 public void fillTest () {

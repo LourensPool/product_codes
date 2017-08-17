@@ -346,12 +346,10 @@ public class StartGUI extends javax.swing.JFrame {
             objGF3.fillTest();
             jTextArea3.setText(objGF3.printArray(objGF3.getSent()));
         } else if (GF == 8){
-            objGF8.fillTest();
+            //objGF8.fillTest();
+            objGF8.fillProbability(10);
             jTextArea3.setText(objGF8.printArray(objGF8.getSent()));
-        }           
-        
-        
-        
+        }               
     }//GEN-LAST:event_jButtonSendZeroActionPerformed
 
     private void jButtonRowDecodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRowDecodeActionPerformed
