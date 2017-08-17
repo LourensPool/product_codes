@@ -5,6 +5,10 @@
  */
 package AppPackage;
 
+import java.util.Enumeration;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
+
 import java.util.Arrays;
 
 /**
@@ -17,7 +21,7 @@ public class StartGUI extends javax.swing.JFrame {
      * Creates new form StartGUI
      */
     public StartGUI() {
-        initComponents();
+        initComponents(); 
     }
 
     /**
@@ -29,20 +33,126 @@ public class StartGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroupGF = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton2 = new javax.swing.JButton();
+        jButtonShowProperties = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jRadioButtonGF2 = new javax.swing.JRadioButton();
+        jRadioButtonGF3 = new javax.swing.JRadioButton();
+        jRadioButtonGF8 = new javax.swing.JRadioButton();
+        jButtonGMatrix = new javax.swing.JButton();
+        jButtonShowInfo = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jButtonGenCW = new javax.swing.JButton();
+        jButtonSendZero = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTextArea4 = new javax.swing.JTextArea();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextArea5 = new javax.swing.JTextArea();
+        jButtonRowDecode = new javax.swing.JButton();
+        jButtonColumnDecode = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jButton2.setText("Show Matrix");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonShowProperties.setText("Show Properties");
+        jButtonShowProperties.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonShowPropertiesActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        jLabel1.setText("X PRODUCT CODES");
+
+        buttonGroupGF.add(jRadioButtonGF2);
+        jRadioButtonGF2.setSelected(true);
+        jRadioButtonGF2.setText("GF 2");
+        jRadioButtonGF2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonGF2ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupGF.add(jRadioButtonGF3);
+        jRadioButtonGF3.setText("GF 3");
+        jRadioButtonGF3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonGF3ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupGF.add(jRadioButtonGF8);
+        jRadioButtonGF8.setText("GF 8");
+        jRadioButtonGF8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonGF8ActionPerformed(evt);
+            }
+        });
+
+        jButtonGMatrix.setText("Show G Matrix");
+        jButtonGMatrix.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGMatrixActionPerformed(evt);
+            }
+        });
+
+        jButtonShowInfo.setText("Show Info Words");
+        jButtonShowInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonShowInfoActionPerformed(evt);
+            }
+        });
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane2.setViewportView(jTextArea2);
+
+        jButtonGenCW.setText("Generate Codewords");
+        jButtonGenCW.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGenCWActionPerformed(evt);
+            }
+        });
+
+        jButtonSendZero.setText("Send All Zero Word");
+        jButtonSendZero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSendZeroActionPerformed(evt);
+            }
+        });
+
+        jTextArea3.setColumns(20);
+        jTextArea3.setRows(5);
+        jScrollPane3.setViewportView(jTextArea3);
+
+        jTextArea4.setColumns(20);
+        jTextArea4.setRows(5);
+        jScrollPane5.setViewportView(jTextArea4);
+
+        jTextArea5.setColumns(20);
+        jTextArea5.setRows(5);
+        jScrollPane6.setViewportView(jTextArea5);
+
+        jButtonRowDecode.setText("Decode Row");
+        jButtonRowDecode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRowDecodeActionPerformed(evt);
+            }
+        });
+
+        jButtonColumnDecode.setText("Decode Column");
+        jButtonColumnDecode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonColumnDecodeActionPerformed(evt);
             }
         });
 
@@ -50,31 +160,233 @@ public class StartGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(151, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(128, 128, 128)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(288, 288, 288))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jButtonGMatrix, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonShowProperties, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jButtonShowInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonGenCW)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonSendZero))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonRowDecode))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonColumnDecode)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jRadioButtonGF2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(jRadioButtonGF3)
+                        .addGap(49, 49, 49)
+                        .addComponent(jRadioButtonGF8)))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(93, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButtonGF2)
+                    .addComponent(jRadioButtonGF3)
+                    .addComponent(jRadioButtonGF8))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonShowProperties)
+                    .addComponent(jButtonShowInfo)
+                    .addComponent(jButtonSendZero)
+                    .addComponent(jButtonRowDecode)
+                    .addComponent(jButtonColumnDecode))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonGMatrix)
+                    .addComponent(jButtonGenCW))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(72, 72, 72))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane2)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    
+    GFx objGF2 = new GFx (2);
+    GFx objGF3 = new GFx (3);
+    GFx objGF8 = new GFx (8);
+    
+    public int getSelectedGF (){
+        String str = "";
+        char lastChar;
+        int GF = 0;
+        
+        for (Enumeration <AbstractButton> buttons = buttonGroupGF.getElements(); buttons.hasMoreElements();){
+            AbstractButton button = buttons.nextElement();
+            
+            if (button.isSelected()){
+                str = button.getText();
+                lastChar = str.charAt(str.length() -1);
+                GF = Character.getNumericValue(lastChar);
+                //System.out.println("Selected GF = " + GF);
+                return GF;
+            }
+        }
+        //System.out.println("-1, getSelectedGF() failed");
+        return -1;
+        
+    }
+     
+    private void jButtonShowPropertiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonShowPropertiesActionPerformed
         // TODO add your handling code here:
-        GFx objGF2 = new GFx ();
-        jTextArea1.setText(objGF2.printG());
-    }//GEN-LAST:event_jButton2ActionPerformed
+        int GF = getSelectedGF();
+        if (GF < 0){
+            return;
+        }
+        else if (GF == 2){
+            jTextArea1.setText(objGF2.printProperties());
+        } else if (GF == 3){
+            jTextArea1.setText(objGF3.printProperties());
+        } else if (GF == 8){
+            jTextArea1.setText(objGF8.printProperties());
+        }    
+    }//GEN-LAST:event_jButtonShowPropertiesActionPerformed
+
+    private void jRadioButtonGF2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonGF2ActionPerformed
+        // TODO add your handling code here:
+       
+       
+    }//GEN-LAST:event_jRadioButtonGF2ActionPerformed
+
+    private void jRadioButtonGF3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonGF3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonGF3ActionPerformed
+
+    private void jButtonGMatrixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGMatrixActionPerformed
+        // TODO add your handling code here:
+        int GF = getSelectedGF ();
+        if (GF < 0 ){
+            return;
+        } else if (GF == 2){
+            jTextArea1.setText(objGF2.printG());
+        } else if (GF == 3){
+            jTextArea1.setText(objGF3.printG());
+        } else if (GF == 8){
+            jTextArea1.setText(objGF8.printG());
+        }
+    }//GEN-LAST:event_jButtonGMatrixActionPerformed
+
+    private void jRadioButtonGF8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonGF8ActionPerformed
+        // TODO add your handling code here:
+        objGF8.testMult();
+        objGF8.generateInfo();
+    }//GEN-LAST:event_jRadioButtonGF8ActionPerformed
+
+    private void jButtonShowInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonShowInfoActionPerformed
+        // TODO add your handling code here:
+        int GF = getSelectedGF ();
+        if (GF < 0 ){
+            return;
+        } else if (GF == 2){
+            objGF2.generateInfo();
+            jTextArea2.setText(objGF2.printArray(objGF2.getInfo()));
+        } else if (GF == 3){
+            jTextArea2.setText(objGF3.printArray(objGF3.getInfo()));
+        } else if (GF == 8){
+            objGF8.generateInfoGF8();
+            jTextArea2.setText(objGF8.printArray(objGF8.getInfo()));
+        }        
+    }//GEN-LAST:event_jButtonShowInfoActionPerformed
+
+    private void jButtonGenCWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenCWActionPerformed
+        // TODO add your handling code here:
+        int GF = getSelectedGF ();
+        if (GF < 0 ){
+            return;
+        } else if (GF == 2){
+            objGF2.generateCW();
+            jTextArea2.setText(objGF2.printArray(objGF2.getCW()));
+        } else if (GF == 3){
+            objGF3.generateCW();
+            jTextArea2.setText(objGF3.printArray(objGF3.getCW()));
+        } else if (GF == 8){
+            objGF8.generateCWGF8();
+            jTextArea2.setText(objGF8.printArray(objGF8.getCW()));
+        }           
+    }//GEN-LAST:event_jButtonGenCWActionPerformed
+
+    private void jButtonSendZeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSendZeroActionPerformed
+        // TODO add your handling code here:
+        int GF = getSelectedGF ();
+        if (GF < 0 ){
+            return;
+        } else if (GF == 2){
+            objGF2.fillTest();
+            jTextArea3.setText(objGF2.printArray(objGF2.getSent()));
+        } else if (GF == 3){
+            objGF3.fillTest();
+            jTextArea3.setText(objGF3.printArray(objGF3.getSent()));
+        } else if (GF == 8){
+            objGF8.fillTest();
+            jTextArea3.setText(objGF8.printArray(objGF8.getSent()));
+        }           
+        
+        
+        
+    }//GEN-LAST:event_jButtonSendZeroActionPerformed
+
+    private void jButtonRowDecodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRowDecodeActionPerformed
+        // TODO add your handling code here:
+        int GF = getSelectedGF ();
+        if (GF < 0 ){
+            return;
+        } else if (GF == 2){
+            objGF2.rowDecode();
+            jTextArea4.setText(objGF2.printArray(objGF2.getSent()));
+        } else if (GF == 3){
+            objGF3.rowDecode();
+            jTextArea4.setText(objGF3.printArray(objGF3.getSent()));
+        } else if (GF == 8){
+            objGF8.rowDecode();
+            jTextArea4.setText(objGF8.printArray(objGF8.getSent()));
+        }      
+    }//GEN-LAST:event_jButtonRowDecodeActionPerformed
+
+    private void jButtonColumnDecodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonColumnDecodeActionPerformed
+
+        int GF = getSelectedGF ();
+        if (GF < 0 ){
+            return;
+        } else if (GF == 2){
+            objGF2.columnDecode();
+            jTextArea5.setText(objGF2.printArray(objGF2.getSent()));
+        } else if (GF == 3){
+            objGF3.columnDecode();
+            jTextArea5.setText(objGF3.printArray(objGF3.getSent()));
+        } else if (GF == 8){
+            objGF8.columnDecode();
+            jTextArea5.setText(objGF8.printArray(objGF8.getSent()));
+        }      
+    }//GEN-LAST:event_jButtonColumnDecodeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -112,8 +424,27 @@ public class StartGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.ButtonGroup buttonGroupGF;
+    private javax.swing.JButton jButtonColumnDecode;
+    private javax.swing.JButton jButtonGMatrix;
+    private javax.swing.JButton jButtonGenCW;
+    private javax.swing.JButton jButtonRowDecode;
+    private javax.swing.JButton jButtonSendZero;
+    private javax.swing.JButton jButtonShowInfo;
+    private javax.swing.JButton jButtonShowProperties;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JRadioButton jRadioButtonGF2;
+    private javax.swing.JRadioButton jRadioButtonGF3;
+    private javax.swing.JRadioButton jRadioButtonGF8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JTextArea jTextArea4;
+    private javax.swing.JTextArea jTextArea5;
     // End of variables declaration//GEN-END:variables
 }

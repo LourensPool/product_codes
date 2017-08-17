@@ -22,18 +22,47 @@ public class GFx {
  * TODO ROW DECODER
  */
 	
-private Integer [][] G = { {1,0,0,0,1,1,1}, {0,1,0,0,1,1,0}, {0,0,1,0,1,0,1}, {0,0,0,1,0,1,1} };
+private Integer [][] G;
 private Integer [][] Info;
 private Integer [][] CW;
 private Integer [][] Sent;
 
-private int n = 7;
-private int k = 4;
-private int d = 3;		// floor ((3 - 1) / 2) = 1 error correction
-private int GF = 2; 
+private int n;
+private int k;
+private int d;		// floor ((3 - 1) / 2) = 1 error correction
+private int GF;
 
-GFx () {
+GFx (int _GF) {
     
+    this.GF = _GF;
+    
+    if (_GF == 2){
+        this.G = new Integer [][] { {1,0,0,0,1,1,1}, {0,1,0,0,1,1,0}, {0,0,1,0,1,0,1}, {0,0,0,1,0,1,1} };
+        this.n = 7;
+        this.k = 4;
+        this.d = 3;
+    } else if (_GF == 3) {
+        this.G = new Integer [][] { {1,0,1,1}, {0,1,1,2} };
+        this.Info = new Integer [][] { {0,0}, {0,1}, {0,2}, {1,0}, {1,1}, {1,2}, {2,0}, {2,1}, {2,2} };    
+        this.n = 4;
+        this.k = 2;
+        this.d = 3;
+    } else if (_GF == 8){
+        this.G = new Integer [][] {   {1,1,0, 0,1,0, 1,0,0, 1,1,0, 1,0,0, 0,0,0, 0,0,0},
+            {0,1,1, 0,0,1, 0,1,0, 0,1,1, 0,1,0, 0,0,0, 0,0,0},
+            {1,1,1, 1,1,0, 0,0,1, 1,1,1, 0,0,1, 0,0,0, 0,0,0},
+            {0,0,0, 1,1,0, 0,1,0, 1,0,0, 1,1,0, 1,0,0, 0,0,0},
+            {0,0,0, 0,1,1, 0,0,1, 0,1,0, 0,1,1, 0,1,0, 0,0,0},
+            {0,0,0, 1,1,1, 1,1,0, 0,0,1, 1,1,1, 0,0,1, 0,0,0},
+            {0,0,0, 0,0,0, 1,1,0, 0,1,0, 1,0,0, 1,1,0, 1,0,0},
+            {0,0,0, 0,0,0, 0,1,1, 0,0,1, 0,1,0, 0,1,1, 0,1,0},
+            {0,0,0, 0,0,0, 1,1,1, 1,1,0, 0,0,1, 1,1,1, 0,0,1}      
+        };
+        this.n = 7;
+        this.k = 3;
+        this.d = 5;
+        System.out.println("GF 8 constructor finished.");
+        }
 }
 
 public Integer [][] getG () {
@@ -68,15 +97,33 @@ public int getGF () {
         return this.GF;
 }
 
+public String printProperties () {
+    StringBuilder str = new StringBuilder();
+    
+    float rateSingle = (float) this.k / (float) this.n;
+    float rateProduct = (float) (this.k * this.k ) / (float) (this.n * this.n);
+    int errorCorrection = (this.d -1 )/2;
+    
+    str.append("Each row and each column is sent as a: \n");
+    str.append("(n, k, d) --> (" + this.n + " ," + this.k + " ," + this.d + ") code.\n");
+    str.append("Each row and column can correct " + errorCorrection + " error(s). \n" );
+    str.append("Code rate = " + String.format("%.2f", rateSingle) + "\n");
+  
+    str.append("\nPRODUCT CODE PROPERTIES:\n" + "(" + this.n * this.n + " ," + this.k * this.k + " ," + this.d * this.d + ")\n" );
+    str.append("Code rate = " + String.format("%.2f", rateProduct) +"\n" );
+    
+    return str.toString();
+}
+
 public String printG () {
 
         StringBuilder strMatrix = new StringBuilder();
 
-        for (int row = 0; row < this.k; row++){
-                for (int column = 0; column < this.n; column++){
+        for (int row = 0; row < this.G.length; row++){
+                for (int column = 0; column < this.G[0].length; column++){
                         strMatrix.append(this.G[row][column]);	
 
-                        if (column == this.k -1){
+                        if (column == this.G[0].length -1){
                                 strMatrix.append(" ");
                         }
 
@@ -95,7 +142,11 @@ static String zeroPad (String s, int L){
 }
 
 public void generateInfo () {
-
+    
+        if (this.GF != 2){
+            return;
+        } 
+        
         // Generates all infowords and stores them in a 2D array named CW. 
         // https://stackoverflow.com/questions/2795678/fill-array-with-binary-numbers
         final int N = this.k;
@@ -129,6 +180,58 @@ public void generateInfo () {
         //System.out.println(Arrays.deepToString(this.Info));			
 }
 
+public void generateInfoGF8 (){
+    final int N = 9;
+    LinkedList<String> list = new LinkedList<String>();
+    String infoWord = "";
+    
+    // Fill list with info words
+    for (int i=0; i < (1 << N); i++){
+             list.add(zeroPad(Integer.toBinaryString(i), N));
+    }
+
+    // Fill array [][] this.Info with info words
+    int rows = (int) Math.pow(2, N);
+    this.Info = new Integer[rows][G.length];
+    Integer bitvalue;
+    
+    while (!list.isEmpty()){
+                for (int row = 0; row < rows; row++){
+                        infoWord = list.remove();
+                        //System.out.println(infoWord + ", ");
+                        for (int column = 0; column < N; column++){
+                                bitvalue = Integer.parseInt(String.valueOf(infoWord.charAt(column)));
+                                //System.out.print(bitvalue + ", ");
+                                this.Info[row][column] = bitvalue; 
+                        }
+                }
+        }
+        System.out.println("CW rows = " + Info.length + " Info columns = " + Info[0].length);
+        //System.out.println(Arrays.deepToString(this.Info));  
+}
+
+public Integer[] testMult () {
+    int rows = this.G.length; // 9
+    int columns = this.G[0].length; // 21
+    
+    System.out.println("Rows = " + rows + " columns = " + columns);
+    
+    Integer [] vector = {0,1,1,0,0,1,0,0,0};
+    Integer [] result = new Integer [columns];
+    
+    Integer sum = 0;
+    
+    for (int i = 0; i < columns; i++){
+        for (int j = 0; j < rows; j++){
+            sum = sum + (G[j][i] * vector [j]);
+        }
+        result[i] = sum % 2;
+        sum = 0;
+    }
+    
+    System.out.println(Arrays.deepToString(result));
+    return result;
+}
 
 public void generateCW () {
         // Multiply Info with G and store result in CW array.
@@ -142,6 +245,23 @@ public void generateCW () {
                                 sum = sum + Info[i][k] * G[k][j];
                         }
                         CW[i][j] = sum % GF;
+                        sum = 0;
+                }
+        }		
+}
+
+public void generateCWGF8 () {
+        // Multiply Info with G and store result in CW array.
+        this.CW = new Integer[this.Info.length][this.G[0].length];
+
+        int sum = 0;
+        for (int i = 0; i < Info.length; i++){
+                for (int j = 0; j < G[0].length; j++){
+                        for (int k = 0; k < Info[0].length; k++){
+                                //CW[i][j] += Info[i][k] * G[k][j];
+                                sum = sum + Info[i][k] * G[k][j];
+                        }
+                        CW[i][j] = sum % 2;
                         sum = 0;
                 }
         }		
@@ -171,10 +291,16 @@ public void fillTest () {
 
         // Generate errors 
         Sent [0][0] = 1;
+        Sent [0][1] = 1;
         Sent [1][1] = 1;
         Sent [2][2] = 1;
         Sent [3][3] = 1;
-        Sent [0][1] = 1; 
+        
+        
+        if (GF == 8){
+            Sent [0][2] = 1;
+            Sent [1][0] = 1;
+        }
 }
 
 public int compareRow (int index) {
@@ -186,8 +312,7 @@ public int compareRow (int index) {
         int columnsSent = Sent[0].length;
         LinkedList <Difference> list = new LinkedList<Difference>();
 
-        //System.out.println("rowsCw = " + rowsCW + "columnsSent = " + columnsSent );
-
+   
         int diff = 0;
         for (int i = 0; i < rowsCW; i++){
                 for (int j = 0; j < columnsSent; j++){
@@ -200,12 +325,9 @@ public int compareRow (int index) {
         }
 
         Collections.sort(list, new WeightComp());
-        //for (Difference objDiff : list){
-        //	System.out.println("index = " + objDiff.getIndexOfCW() + " weight = " +  objDiff.getWeight());
-        //}
         int result = list.get(0).getIndexOfCW();
         return result;
-        //System.out.println("Index of right CW = " + result);
+  
 }
 
 public void rowDecode (){
@@ -216,6 +338,7 @@ public void rowDecode (){
                 // swap row of Sent[index][] with CW[index][]
                 for (int j = 0; j < Sent.length; j++){
                         Sent[i][j] = CW[index][j];
+               
                 }
         }
 }
@@ -260,5 +383,4 @@ public void columnDecode () {
                 }
         }
 }
-
 }
