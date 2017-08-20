@@ -24,13 +24,21 @@ public class GFx {
  */
 	
 private Integer [][] G;
+private Integer [][] GColumn; 
+
 private Integer [][] Info;
 private Integer [][] CW;
+private Integer [][] CWColumn;
 private Integer [][] Sent;
 
 private int n;
 private int k;
 private int d;		// floor ((3 - 1) / 2) = 1 error correction
+
+private int nColumn;
+private int kColumn;
+private int dColumn;
+
 private int GF;
 
 GFx (int _GF) {
@@ -39,9 +47,15 @@ GFx (int _GF) {
     
     if (_GF == 2){
         this.G = new Integer [][] { {1,0,0,0,1,1,1}, {0,1,0,0,1,1,0}, {0,0,1,0,1,0,1}, {0,0,0,1,0,1,1} };
+        this.GColumn = new Integer [][] { {1,0,1,1,1,1,0,0}, {0,1,1,1,0,0,1,1} };
+        
         this.n = 7;
         this.k = 4;
         this.d = 3;
+        
+        this.nColumn = 8;
+        this.kColumn = 2;
+        this.dColumn = 5;
     } else if (_GF == 3) {
         this.G = new Integer [][] { {1,0,1,1}, {0,1,1,2} };
         this.Info = new Integer [][] { {0,0}, {0,1}, {0,2}, {1,0}, {1,1}, {1,2}, {2,0}, {2,1}, {2,2} };    
@@ -49,7 +63,8 @@ GFx (int _GF) {
         this.k = 2;
         this.d = 3;
     } else if (_GF == 8){
-        this.G = new Integer [][] {   {1,1,0, 0,1,0, 1,0,0, 1,1,0, 1,0,0, 0,0,0, 0,0,0},
+        this.G = new Integer [][] {   
+            {1,1,0, 0,1,0, 1,0,0, 1,1,0, 1,0,0, 0,0,0, 0,0,0},
             {0,1,1, 0,0,1, 0,1,0, 0,1,1, 0,1,0, 0,0,0, 0,0,0},
             {1,1,1, 1,1,0, 0,0,1, 1,1,1, 0,0,1, 0,0,0, 0,0,0},
             {0,0,0, 1,1,0, 0,1,0, 1,0,0, 1,1,0, 1,0,0, 0,0,0},
@@ -61,13 +76,16 @@ GFx (int _GF) {
         };
         this.n = 7;
         this.k = 3;
-        this.d = 5;
-        System.out.println("GF 8 constructor finished.");
+        this.d = 5;     
         }
 }
 
 public Integer [][] getG () {
         return this.G;
+}
+
+public Integer [][] getGColumn () {
+    return this.GColumn;
 }
 
 public Integer [][] getInfo () {
@@ -76,6 +94,10 @@ public Integer [][] getInfo () {
 
 public Integer [][] getCW () {
         return this.CW;
+}
+
+public Integer [][] getCWColumn () {
+        return this.CWColumn;
 }
 
 public Integer [][] getSent () {
@@ -105,7 +127,7 @@ public String printProperties () {
     float rateProduct = (float) (this.k * this.k ) / (float) (this.n * this.n);
     int errorCorrection = (this.d -1 )/2;
     
-    str.append("Each row and each column is sent as a: \n");
+    str.append("Rows and columns are sent as: \n");
     str.append("(n, k, d) --> (" + this.n + " ," + this.k + " ," + this.d + ") code.\n");
     str.append("Each row and column can correct " + errorCorrection + " error(s). \n" );
     str.append("Code rate = " + String.format("%.2f", rateSingle) + "\n");
@@ -207,7 +229,7 @@ public void generateInfoGF8 (){
                         }
                 }
         }
-        System.out.println("CW rows = " + Info.length + " Info columns = " + Info[0].length);
+        //System.out.println("CW rows = " + Info.length + " Info columns = " + Info[0].length);
         //System.out.println(Arrays.deepToString(this.Info));  
 }
 
@@ -234,22 +256,32 @@ public Integer[] testMult () {
     return result;
 }
 
-public void generateCW () {
+public void generateCW (Integer [][] _Info, Integer [][] _G, Integer[][] _CW, boolean column) {
         // Multiply Info with G and store result in CW array.
-        this.CW = new Integer[this.Info.length][this.G[0].length];
-
+        
+        if (column){
+            this.CWColumn = new Integer[_Info.length][_G[0].length];
+        } else if (!column){
+            this.CW = new Integer[_Info.length][_G[0].length];
+        }
+          
         int sum = 0;
-        for (int i = 0; i < Info.length; i++){
-                for (int j = 0; j < G[0].length; j++){
-                        for (int k = 0; k < Info[0].length; k++){
-                                //CW[i][j] += Info[i][k] * G[k][j];
-                                sum = sum + Info[i][k] * G[k][j];
+        for (int i = 0; i < _Info.length; i++){
+                for (int j = 0; j < _G[0].length; j++){
+                        for (int k = 0; k < _Info[0].length; k++){
+                                //CW[i][j] += _Info[i][k] * _G[k][j];
+                                sum = sum + _Info[i][k] * _G[k][j];
                         }
-                        CW[i][j] = sum % GF;
+                        if (column){
+                            CWColumn[i][j] = sum % GF;
+                        } else if (!column){
+                            CW[i][j] = sum % GF;
+                        }
+                        }
                         sum = 0;
-                }
-        }		
-}
+        }
+}   
+
 
 public void generateCWGF8 () {
         // Multiply Info with G and store result in CW array.
@@ -265,7 +297,8 @@ public void generateCWGF8 () {
                         CW[i][j] = sum % 2;
                         sum = 0;
                 }
-        }		
+        }
+        //System.out.println("Length of CW should be 21 and is: " + CW[0].length);
 }
 
 public String printArray (Integer [][] array){
@@ -284,19 +317,23 @@ public String printArray (Integer [][] array){
         return str.toString();
 }
 
-public void fillProbability (int deler) {
-    // Fills with '1' with prob. 1/deler.
+public void fillProbability (double p) {
+    int size = CW[0].length;
     
-    Sent = new Integer [n][n];
+    Sent = new Integer [size][size];
     for (Integer [] row : Sent){
                 Arrays.fill(row, 0);
     }
-    
+      
+    if (p < 0 || p > 0.5){
+        System.out.println("P must be between 0 and 0.5 and is: " + p);
+        // TODO POPUP ERROR BIATCH;
+    }
+     
     for (int i=0; i < Sent.length; i++){
         for (int j=0; j < Sent[0].length; j++){
-            int val = new Random().nextInt(deler);
-  
-            if (val == 0){
+            
+            if (Math.random() <= p ){
                 Sent[i][j] = 1;
             }
         }
@@ -332,7 +369,6 @@ public int compareRow (int index) {
         int columnsSent = Sent[0].length;
         LinkedList <Difference> list = new LinkedList<Difference>();
 
-   
         int diff = 0;
         for (int i = 0; i < rowsCW; i++){
                 for (int j = 0; j < columnsSent; j++){
@@ -348,19 +384,6 @@ public int compareRow (int index) {
         int result = list.get(0).getIndexOfCW();
         return result;
   
-}
-
-public void rowDecode (){
-        int index;
-
-        for (int i = 0; i < Sent.length; i++){
-                index = compareRow(i);
-                // swap row of Sent[index][] with CW[index][]
-                for (int j = 0; j < Sent.length; j++){
-                        Sent[i][j] = CW[index][j];
-               
-                }
-        }
 }
 
 public int compareColumn (int column) {
@@ -391,9 +414,24 @@ public int compareColumn (int column) {
         return result;		
 }
 
+public void rowDecode (){
+        int index;
+        
+        //System.out.println("Rows in Sent = " + Sent.length);
+        for (int i = 0; i < Sent.length; i++){
+                index = compareRow(i);
+                // swap row of Sent[index][] with CW[index][]
+                for (int j = 0; j < Sent.length; j++){
+                        Sent[i][j] = CW[index][j];
+               
+                }
+        }
+}
+
 public void columnDecode () {	
         int column;
 
+        //System.out.println("Columns in Sent = " + Sent[0].length);
         // Loop through all columns in Sent[][]
         for (int i = 0; i < Sent[0].length; i++){
                 column = compareColumn(i);
