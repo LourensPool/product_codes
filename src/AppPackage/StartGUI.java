@@ -352,6 +352,9 @@ public class StartGUI extends javax.swing.JFrame {
             str2 += "\nLength of infoword = " + objGF2.getInfo()[0].length + "\n\n";
            
             str2 += objGF2.printArray(objGF2.getInfo());
+            objGF2.generateInfoColumn();
+            str2 += "\n\n" + objGF2.printArray(objGF2.getInfoColumn());
+            
             jTextArea2.setText(str2);
         } else if (GF == 3){   
             String str3 = "Amount of infowords = " + objGF3.getInfo().length;
@@ -379,19 +382,19 @@ public class StartGUI extends javax.swing.JFrame {
         if (GF < 0 ){
             return;
         } else if (GF == 2){
-            objGF2.generateCW(objGF2.getInfo(), objGF2.getG(), objGF2.getCW(), false);
+            objGF2.generateCW();
             String str2 = "";
             str2 += "Length of a codeword = " + objGF2.getCW()[0].length;
             
             str2 += "\n\n" + objGF2.printArray(objGF2.getCW());
             
             // Column with (7,4,4) test
-            objGF2.generateCW(objGF2.getInfo(), objGF2.getGColumn(), objGF2.getCWColumn(), true);
+            objGF2.generateCWColumn();
   
             str2 += "\n\nCOLUMN CODEWORD TEST \n\n" + objGF2.printArray(objGF2.getCWColumn());
             jTextArea2.setText(str2);
         } else if (GF == 3){
-            objGF3.generateCW(objGF3.getInfo(), objGF3.getG(), objGF3.getCW(), false);
+            objGF3.generateCW();
             String str3 = "";
             str3 += "Length of a codeword = " + objGF3.getCW()[0].length;
             jTextArea2.setText(str3 + "\n\n" + objGF3.printArray(objGF3.getCW()));

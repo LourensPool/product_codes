@@ -27,6 +27,7 @@ private Integer [][] G;
 private Integer [][] GColumn; 
 
 private Integer [][] Info;
+private Integer [][] infoColumn;
 private Integer [][] CW;
 private Integer [][] CWColumn;
 private Integer [][] Sent;
@@ -90,6 +91,10 @@ public Integer [][] getGColumn () {
 
 public Integer [][] getInfo () {
         return this.Info;
+}
+
+public Integer [][] getInfoColumn () {
+    return this.infoColumn;
 }
 
 public Integer [][] getCW () {
@@ -187,20 +192,47 @@ public void generateInfo () {
         Integer bitvalue;
 
         while (!list.isEmpty()){
-
-                //infoWord = list.remove();
-                //System.out.println(infoWord);
-
                 for (int row = 0; row < rows; row++){
                         infoWord = list.remove();
                         for (int column = 0; column < this.k; column++){
                                 bitvalue = Integer.parseInt(String.valueOf(infoWord.charAt(column)));
-                                //System.out.print(bitvalue);
                                 this.Info[row][column] = bitvalue; 
                         }
                 }
+        }		
+}
+
+public void generateInfoColumn () {
+    
+        if (this.GF != 2){
+            return;
+        } 
+        
+        // Generates all infowords and stores them in a 2D array named CW. 
+        // https://stackoverflow.com/questions/2795678/fill-array-with-binary-numbers
+        final int N = this.kColumn;
+        LinkedList<String> list = new LinkedList<String>();
+        String infoWord = "";
+
+        // Fill list with info words
+        for (int i=0; i < (1 << N); i++){
+                 list.add(zeroPad(Integer.toBinaryString(i), N));
         }
-        //System.out.println(Arrays.deepToString(this.Info));			
+
+        // Fill array [][] this.Info with info words
+        int rows = (int) Math.pow(this.GF, this.kColumn);
+        this.infoColumn = new Integer[rows][this.kColumn];
+        Integer bitvalue;
+
+        while (!list.isEmpty()){
+                for (int row = 0; row < rows; row++){
+                        infoWord = list.remove();
+                        for (int column = 0; column < this.kColumn; column++){
+                                bitvalue = Integer.parseInt(String.valueOf(infoWord.charAt(column)));
+                                this.infoColumn[row][column] = bitvalue; 
+                        }
+            }
+        }		
 }
 
 public void generateInfoGF8 (){
@@ -256,32 +288,39 @@ public Integer[] testMult () {
     return result;
 }
 
-public void generateCW (Integer [][] _Info, Integer [][] _G, Integer[][] _CW, boolean column) {
+public void generateCW () {
         // Multiply Info with G and store result in CW array.
-        
-        if (column){
-            this.CWColumn = new Integer[_Info.length][_G[0].length];
-        } else if (!column){
-            this.CW = new Integer[_Info.length][_G[0].length];
-        }
-          
+        this.CW = new Integer[Info.length][G[0].length];
+     
         int sum = 0;
-        for (int i = 0; i < _Info.length; i++){
-                for (int j = 0; j < _G[0].length; j++){
-                        for (int k = 0; k < _Info[0].length; k++){
-                                //CW[i][j] += _Info[i][k] * _G[k][j];
-                                sum = sum + _Info[i][k] * _G[k][j];
+        for (int i = 0; i < Info.length; i++){
+                for (int j = 0; j < G[0].length; j++){
+                        for (int k = 0; k < Info[0].length; k++){
+                            //CW[i][j] += _Info[i][k] * _G[k][j];
+                            sum = sum + Info[i][k] * G[k][j];
                         }
-                        if (column){
-                            CWColumn[i][j] = sum % GF;
-                        } else if (!column){
-                            CW[i][j] = sum % GF;
-                        }
-                        }
+                        CW[i][j] = sum % GF;
                         sum = 0;
+                }
         }
 }   
 
+public void generateCWColumn () {
+        // Multiply Info with G and store result in CW array.
+        this.CWColumn = new Integer [infoColumn.length][GColumn[0].length];
+        
+        int sum = 0;
+        for (int i = 0; i < infoColumn.length; i++){
+                for (int j = 0; j < GColumn[0].length; j++){
+                        for (int k = 0; k < infoColumn[0].length; k++){
+                            //CW[i][j] += _Info[i][k] * _G[k][j];
+                            sum = sum + infoColumn[i][k] * GColumn[k][j];
+                        }
+                        CWColumn[i][j] = sum % GF;
+                        sum = 0;
+                }                 
+        }
+}   
 
 public void generateCWGF8 () {
         // Multiply Info with G and store result in CW array.
