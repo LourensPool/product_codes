@@ -28,6 +28,7 @@ private Integer [][] GColumn;
 
 private Integer [][] Info;
 private Integer [][] infoColumn;
+
 private Integer [][] CW;
 private Integer [][] CWColumn;
 private Integer [][] Sent;
@@ -47,16 +48,7 @@ GFx (int _GF) {
     this.GF = _GF;
     
     if (_GF == 2){
-        this.G = new Integer [][] { {1,0,0,0,1,1,1}, {0,1,0,0,1,1,0}, {0,0,1,0,1,0,1}, {0,0,0,1,0,1,1} };
-        this.GColumn = new Integer [][] { {1,0,1,1,1,1,0,0}, {0,1,1,1,0,0,1,1} };
-        
-        this.n = 7;
-        this.k = 4;
-        this.d = 3;
-        
-        this.nColumn = 8;
-        this.kColumn = 2;
-        this.dColumn = 5;
+      
     } else if (_GF == 3) {
         this.G = new Integer [][] { {1,0,1,1}, {0,1,1,2} };
         this.Info = new Integer [][] { {0,0}, {0,1}, {0,2}, {1,0}, {1,1}, {1,2}, {2,0}, {2,1}, {2,2} };    
@@ -82,15 +74,29 @@ GFx (int _GF) {
 }
 
 public Integer [][] getG () {
-        return this.G;
+    return this.G;
+}
+
+public void setG (Integer [][] _G, int _n, int _k, int _d) {
+    this.G = _G;
+    this.n = _n;
+    this.k = _k;
+    this.d = _d;
 }
 
 public Integer [][] getGColumn () {
     return this.GColumn;
 }
 
+public void setGColumn (Integer [][] _G, int _n, int _k, int _d){
+    this.GColumn = _G;
+    this.nColumn = _n;
+    this.kColumn = _k;
+    this.dColumn = _d;
+}
+
 public Integer [][] getInfo () {
-        return this.Info;
+    return this.Info;
 }
 
 public Integer [][] getInfoColumn () {
@@ -98,46 +104,53 @@ public Integer [][] getInfoColumn () {
 }
 
 public Integer [][] getCW () {
-        return this.CW;
+    return this.CW;
 }
 
 public Integer [][] getCWColumn () {
-        return this.CWColumn;
+    return this.CWColumn;
 }
 
 public Integer [][] getSent () {
-        return this.Sent;
+    return this.Sent;
 }
 
 public int getN () {
-        return this.n;
+    return this.n;
 }
 
 public int getK () {
-        return this.k;
+    return this.k;
 }
 
 public int getD () {
-        return this.d;
+    return this.d;
 }
 
 public int getGF () {
-        return this.GF;
+    return this.GF;
 }
 
 public String printProperties () {
     StringBuilder str = new StringBuilder();
     
     float rateSingle = (float) this.k / (float) this.n;
-    float rateProduct = (float) (this.k * this.k ) / (float) (this.n * this.n);
+    float rateProduct = (float) (this.k * this.kColumn ) / (float) (this.n * this.nColumn);
     int errorCorrection = (this.d -1 )/2;
     
-    str.append("Rows and columns are sent as: \n");
-    str.append("(n, k, d) --> (" + this.n + " ," + this.k + " ," + this.d + ") code.\n");
-    str.append("Each row and column can correct " + errorCorrection + " error(s). \n" );
-    str.append("Code rate = " + String.format("%.2f", rateSingle) + "\n");
+    float rateColumn = (float) this.kColumn / (float) this.nColumn;
+    int errorCorrectionColumn = (this.dColumn -1) /2;
+    
+    str.append("Rows are sent as: \n");
+    str.append("(n, k, d) --> (" + this.n + " ," + this.k + " ," + this.d + ") codes.\n");
+    str.append("Each row can correct " + errorCorrection + " error(s). \n" );
+    str.append("Code rate = " + String.format("%.2f", rateSingle) + "\n\n");
+    
+    str.append("Columns are sent as (" + this.nColumn + " ," + this.kColumn + " ," + this.dColumn + ") codes.\n" );
+    str.append("Each column can correct " + errorCorrectionColumn + " error(s)\n");
+    str.append("Code rate = " + String.format("%.2f", rateColumn) + "\n");
   
-    str.append("\nPRODUCT CODE PROPERTIES:\n" + "(" + this.n * this.n + " ," + this.k * this.k + " ," + this.d * this.d + ")\n" );
+    str.append("\nRODUCT CODE PROPERTIES:\n" + "(" + this.n * this.nColumn + " ," + this.k * this.kColumn + " ," + this.d * this.dColumn + ")\n" );
     str.append("Code rate = " + String.format("%.2f", rateProduct) +"\n" );
     
     return str.toString();
@@ -357,9 +370,11 @@ public String printArray (Integer [][] array){
 }
 
 public void fillProbability (double p) {
-    int size = CW[0].length;
+    int columns = CW[0].length;
+    int rows = CWColumn[0].length;
+    Sent = new Integer [rows][columns];
+    System.out.println("columns = " + columns + " rows = " + rows);
     
-    Sent = new Integer [size][size];
     for (Integer [] row : Sent){
                 Arrays.fill(row, 0);
     }
@@ -406,7 +421,7 @@ public int compareRow (int index) {
 
         int rowsCW = CW.length;
         int columnsSent = Sent[0].length;
-        LinkedList <Difference> list = new LinkedList<Difference>();
+        LinkedList <Difference> list = new LinkedList <Difference>();
 
         int diff = 0;
         for (int i = 0; i < rowsCW; i++){
@@ -427,17 +442,17 @@ public int compareRow (int index) {
 
 public int compareColumn (int column) {
         int rowsSent = Sent.length;
-        int columnsCW = CW[0].length;
+        int rowsCW = CWColumn.length;
 
         LinkedList <Difference> list = new LinkedList<Difference>();
 
         int diff = 0;
         // COLUMN IS FIXED so loop through all rows of CW first
-        for (int i = 0; i < columnsCW; i++){
+        for (int i = 0; i < rowsCW; i++){
                 // FOR each row loop through columns in CW 
                 for (int j = 0; j < rowsSent; j++){
 
-                        if (CW[i][j] != Sent[j][column]){
+                        if (CWColumn[i][j] != Sent[j][column]){
                                 diff++;
                         }	
                 }
@@ -460,9 +475,8 @@ public void rowDecode (){
         for (int i = 0; i < Sent.length; i++){
                 index = compareRow(i);
                 // swap row of Sent[index][] with CW[index][]
-                for (int j = 0; j < Sent.length; j++){
+                for (int j = 0; j < Sent[0].length; j++){
                         Sent[i][j] = CW[index][j];
-               
                 }
         }
 }
@@ -476,7 +490,7 @@ public void columnDecode () {
                 column = compareColumn(i);
                 // Change column of Sent[][i] to row of CW[i][]
                 for (int j = 0; j < Sent[0].length; j++){
-                        Sent[j][i] = CW[column][j];
+                        Sent[j][i] = CWColumn[column][j];
                 }
         }
 }
