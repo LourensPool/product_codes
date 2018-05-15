@@ -1,5 +1,8 @@
 # Compiled source #
 ###################
-~/Git/product_codes/build/*
+build/*
 
+*.class
+*.form
+*.rs
 
