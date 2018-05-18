@@ -46,7 +46,10 @@ private int GF;
 GFx (int _GF) {
     
     this.GF = _GF;
-    
+    this.n = 7;
+    this.k = 3;
+    this.d = 5; 
+
     if (_GF == 2){
       
     } else if (_GF == 3) {
@@ -66,10 +69,7 @@ GFx (int _GF) {
             {0,0,0, 0,0,0, 1,1,0, 0,1,0, 1,0,0, 1,1,0, 1,0,0},
             {0,0,0, 0,0,0, 0,1,1, 0,0,1, 0,1,0, 0,1,1, 0,1,0},
             {0,0,0, 0,0,0, 1,1,1, 1,1,0, 0,0,1, 1,1,1, 0,0,1}      
-        };
-        this.n = 7;
-        this.k = 3;
-        this.d = 5;     
+        }; // From slide 4.24         
         }
 }
 
@@ -115,6 +115,10 @@ public Integer [][] getSent () {
     return this.Sent;
 }
 
+public void setSent(Integer[][] sentWithUserErrors){
+    this.Sent = sentWithUserErrors;
+}
+
 public int getN () {
     return this.n;
 }
@@ -146,12 +150,18 @@ public String printProperties () {
     str.append("Each row can correct " + errorCorrection + " error(s). \n" );
     str.append("Code rate = " + String.format("%.2f", rateSingle) + "\n\n");
     
-    str.append("Columns are sent as (" + this.nColumn + " ," + this.kColumn + " ," + this.dColumn + ") codes.\n" );
-    str.append("Each column can correct " + errorCorrectionColumn + " error(s)\n");
-    str.append("Code rate = " + String.format("%.2f", rateColumn) + "\n");
-  
-    str.append("\nRODUCT CODE PROPERTIES:\n" + "(" + this.n * this.nColumn + " ," + this.k * this.kColumn + " ," + this.d * this.dColumn + ")\n" );
-    str.append("Code rate = " + String.format("%.2f", rateProduct) +"\n" );
+    if (GF == 2){
+        str.append("Columns are sent as (" + this.nColumn + " ," + this.kColumn + " ," + this.dColumn + ") codes.\n" );
+        str.append("Each column can correct " + errorCorrectionColumn + " error(s)\n");
+        str.append("Code rate = " + String.format("%.2f", rateColumn) + "\n");
+
+        str.append("\nRODUCT CODE PROPERTIES:\n" + "(" + this.n * this.nColumn + " ," + this.k * this.kColumn + " ," + this.d * this.dColumn + ")\n" );
+        str.append("Code rate = " + String.format("%.2f", rateProduct) +"\n" );     
+    } else {
+        float rateEqualProduct =  (float) (this.k * this.k ) / (float) (this.n * this.n);
+        str.append("\nRODUCT CODE PROPERTIES:\n" + "(" + this.n * this.n + " ," + this.k * this.k + " ," + this.d * this.d + ")\n" );
+        str.append("Code rate = " + String.format("%.2f", rateEqualProduct ) +"\n" );
+    }
     
     return str.toString();
 }
@@ -350,7 +360,7 @@ public void generateCWGF8 () {
                         sum = 0;
                 }
         }
-        //System.out.println("Length of CW should be 21 and is: " + CW[0].length);
+//        System.out.println("Length of CW should be 21 and is: " + CW[0].length);
 }
 
 public String printArray (Integer [][] array){
@@ -391,6 +401,17 @@ public void fillProbability (double p) {
                 Sent[i][j] = 1;
             }
         }
+    }
+}
+
+public void fillZero (){
+    int columns = CW[0].length;
+    int rows = CWColumn[0].length;
+    Sent = new Integer [rows][columns];
+    System.out.println("columns = " + columns + " rows = " + rows);
+    
+    for (Integer [] row : Sent){
+                Arrays.fill(row, 0);
     }
 }
 
