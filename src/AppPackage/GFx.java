@@ -54,7 +54,7 @@ GFx (int _GF) {
       
     } else if (_GF == 3) {
         this.G = new Integer [][] { {1,0,1,1}, {0,1,1,2} };
-        this.Info = new Integer [][] { {0,0}, {0,1}, {0,2}, {1,0}, {1,1}, {1,2}, {2,0}, {2,1}, {2,2} };    
+        this.Info = new Integer [][] { {0,0}, {0,1}, {0,2}, {1,0}, {1,1}, {1,2}, {2,0}, {2,1}, {2,2} };
         this.n = 4;
         this.k = 2;
         this.d = 3;
@@ -311,6 +311,32 @@ public Integer[] testMult () {
     return result;
 }
 
+public void generateCW_GF3 (Integer [][] _Info, Integer [][] _G, Integer[][] _CW, boolean column) {
+        // Multiply Info with G and store result in CW array.
+        
+        if (column){
+            this.CWColumn = new Integer[_Info.length][_G[0].length];
+        } else if (!column){
+            this.CW = new Integer[_Info.length][_G[0].length];
+        }
+          
+        int sum = 0;
+        for (int i = 0; i < _Info.length; i++){
+                for (int j = 0; j < _G[0].length; j++){
+                        for (int k = 0; k < _Info[0].length; k++){
+                                //CW[i][j] += _Info[i][k] * _G[k][j];
+                                sum = sum + _Info[i][k] * _G[k][j];
+                        }
+                        if (column){
+                            CWColumn[i][j] = sum % GF;
+                        } else if (!column){
+                            CW[i][j] = sum % GF;
+                        }
+                        }
+                        sum = 0;
+        }
+}  
+
 public void generateCW () {
         // Multiply Info with G and store result in CW array.
         this.CW = new Integer[Info.length][G[0].length];
@@ -326,6 +352,11 @@ public void generateCW () {
                         sum = 0;
                 }
         }
+        
+        if (this.GF == 3){
+            this.CWColumn = this.CW;
+        }
+        
 }   
 
 
@@ -361,6 +392,9 @@ public void generateCWGF8 () {
                         sum = 0;
                 }
         }
+        
+        this.CWColumn = this.CW;
+        
 //        System.out.println("Length of CW should be 21 and is: " + CW[0].length);
 }
 
@@ -442,8 +476,10 @@ public void fillGilbert(double pGG, double pBB){
 public void fillZero (){
     int columns = CW[0].length;
     int rows = CWColumn[0].length;
-    Sent = new Integer [rows][columns];
     System.out.println("columns = " + columns + " rows = " + rows);
+    
+    Sent = new Integer [rows][columns];
+    
     
     for (Integer [] row : Sent){
                 Arrays.fill(row, 0);

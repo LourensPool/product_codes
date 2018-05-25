@@ -515,9 +515,9 @@ public class StartGUI extends javax.swing.JFrame {
     private void jButtonSendZeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSendZeroActionPerformed
         // TODO add your handling code here:
         // Prev actions
-        //jButtonShowPropertiesActionPerformed(evt);
-        //jButtonShowInfoActionPerformed(evt);
-        //jButtonGenCWActionPerformed(evt);
+        jButtonShowPropertiesActionPerformed(evt);
+        jButtonShowInfoActionPerformed(evt);
+        jButtonGenCWActionPerformed(evt);
         
         
         int GF = getSelectedGF ();       
@@ -532,10 +532,10 @@ public class StartGUI extends javax.swing.JFrame {
             jTextArea5.setText(objGF2.printArray(objGF2.getSent()));
             
         } else if (GF == 3){
-            JOptionPane.showMessageDialog(null, "Before objGF3.fillZero(). CWColumn.length = " );
-            objGF3.generateCWColumn();
+            //JOptionPane.showMessageDialog(null, "Before objGF3.fillZero(). CWColumn.length = " );
+            //objGF3.generateCW_GF3(objGF3.getInfo(), objGF3.getG(), objGF3.getCW(), false);
             objGF3.fillZero();
-            JOptionPane.showMessageDialog(null, "After objGF3.fillZero()");
+            //JOptionPane.showMessageDialog(null, "After objGF3.fillZero()");
             jTextArea3.setText(objGF3.printArray(objGF3.getSent()));
             jTextArea4.setText(objGF3.printArray(objGF3.getSent()));
             jTextArea5.setText(objGF3.printArray(objGF3.getSent()));
@@ -627,11 +627,17 @@ public class StartGUI extends javax.swing.JFrame {
 //        System.out.println(lines);
         
         int GF = getSelectedGF();
-        
-        // TODO: add GF3, GF8.
-        GFx obj = objGF2;
-        
- 
+  
+       
+        GFx obj = null;
+        if (GF == 2) {
+            obj = objGF2;
+        } else if (GF == 3) {
+            obj = objGF3;
+        } else if (GF == 8){
+            obj = objGF8;
+        }
+     
         Integer[][] oldSend = obj.getSent();
         int rows = oldSend.length;
         int columns = oldSend[0].length;
@@ -651,15 +657,39 @@ public class StartGUI extends javax.swing.JFrame {
         }
         return userErrors;
     }
+    
+    private void setTextSent(int GF){
+        if (GF < 0 ){
+            return;
+        } else if (GF == 2){
+            jTextArea3.setText(objGF2.printArray(objGF2.getSent()));
+            jTextArea4.setText(objGF2.printArray(objGF2.getSent()));
+            jTextArea5.setText(objGF2.printArray(objGF2.getSent()));
+            
+        } else if (GF == 3){
+            jTextArea3.setText(objGF3.printArray(objGF3.getSent()));
+            jTextArea4.setText(objGF3.printArray(objGF3.getSent()));
+            jTextArea5.setText(objGF3.printArray(objGF3.getSent()));
+        } else if (GF == 8){
+            //objGF8.fillTest();
+            jTextArea3.setText(objGF8.printArray(objGF8.getSent()));
+            jTextArea4.setText(objGF8.printArray(objGF8.getSent()));
+            jTextArea5.setText(objGF8.printArray(objGF8.getSent()));
+        }          
+    }
    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Prev actions
-        jButtonGenCWActionPerformed(evt);
+        //jButtonGenCWActionPerformed(evt);
 
         // Print user induced errors
         objGF2.setSent(getUserErrors());
-        jTextArea4.setText(objGF2.printArray(objGF2.getSent()));
-        jTextArea5.setText(objGF2.printArray(objGF2.getSent()));
+        objGF3.setSent(getUserErrors());
+        objGF8.setSent(getUserErrors());
+        
+        setTextSent(getSelectedGF());
+        
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jColumnBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jColumnBoxActionPerformed
