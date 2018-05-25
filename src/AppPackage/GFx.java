@@ -328,6 +328,7 @@ public void generateCW () {
         }
 }   
 
+
 public void generateCWColumn () {
         // Multiply Info with G and store result in CW array.
         this.CWColumn = new Integer [infoColumn.length][GColumn[0].length];
@@ -402,6 +403,40 @@ public void fillProbability (double p) {
             }
         }
     }
+}
+
+public void fillGilbert(double pGG, double pBB){
+    int columns = CW[0].length;
+    int rows = CWColumn[0].length;
+    Sent = new Integer [rows][columns];
+    
+    // Initialize Sent to zero. 
+    for (Integer [] row : Sent){
+                Arrays.fill(row, 0);
+    }
+    
+    // Use good and bad state transition to model burst errors.
+    int goodState = 1;
+    
+    for (Integer[] Sent1 : Sent) {
+        for (int j = 0; j < Sent[0].length; j++) {
+            // Good and bad state model here. 
+            double chance = Math.random();
+            
+            switch (goodState) {
+                case 1:  if (chance <= 1 - pGG) goodState = 0;
+                break;
+                case 0: if (chance <= 1 - pBB) goodState = 1;
+                break;  
+            }
+            // Use new state to input errors
+            if (goodState == 0) {
+                Sent1[j] = 1;
+            }
+        }
+    }
+    
+    
 }
 
 public void fillZero (){
