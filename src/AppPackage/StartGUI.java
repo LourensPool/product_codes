@@ -26,7 +26,6 @@ public class StartGUI extends javax.swing.JFrame {
         
         initComponents(); 
         selectG();
-        
     }
 
     /**
@@ -176,29 +175,36 @@ public class StartGUI extends javax.swing.JFrame {
             }
         });
 
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Ubuntu Light", 0, 20)); // NOI18N
+        jTextArea1.setFont(new java.awt.Font("Ubuntu Light", 0, 23)); // NOI18N
         jTextArea1.setRows(5);
         jScrollPane4.setViewportView(jTextArea1);
 
+        jTextArea2.setEditable(false);
         jTextArea2.setColumns(19);
-        jTextArea2.setFont(new java.awt.Font("Ubuntu Light", 0, 20)); // NOI18N
+        jTextArea2.setFont(new java.awt.Font("Ubuntu Light", 0, 23)); // NOI18N
         jTextArea2.setRows(5);
         jScrollPane1.setViewportView(jTextArea2);
 
         jTextArea3.setColumns(10);
-        jTextArea3.setFont(new java.awt.Font("Ubuntu Light", 0, 25)); // NOI18N
+        jTextArea3.setFont(new java.awt.Font("Ubuntu Light", 0, 23)); // NOI18N
         jTextArea3.setRows(5);
+        jTextArea3.setTabSize(1);
         jScrollPane2.setViewportView(jTextArea3);
 
+        jTextArea4.setEditable(false);
         jTextArea4.setColumns(10);
-        jTextArea4.setFont(new java.awt.Font("Ubuntu Light", 0, 25)); // NOI18N
+        jTextArea4.setFont(new java.awt.Font("Ubuntu Light", 0, 23)); // NOI18N
         jTextArea4.setRows(5);
+        jTextArea4.setTabSize(1);
         jScrollPane3.setViewportView(jTextArea4);
 
+        jTextArea5.setEditable(false);
         jTextArea5.setColumns(10);
-        jTextArea5.setFont(new java.awt.Font("Ubuntu Light", 0, 25)); // NOI18N
+        jTextArea5.setFont(new java.awt.Font("Ubuntu Light", 0, 23)); // NOI18N
         jTextArea5.setRows(5);
+        jTextArea5.setTabSize(1);
         jScrollPane5.setViewportView(jTextArea5);
 
         pGG.addActionListener(new java.awt.event.ActionListener() {
@@ -229,9 +235,21 @@ public class StartGUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(118, Short.MAX_VALUE)
+                .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonShowProperties, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(81, 81, 81)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonShowInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonGenCW, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -240,7 +258,6 @@ public class StartGUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jRowBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jColumnBox, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButtonShowProperties, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jRadioButtonGF2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -248,24 +265,8 @@ public class StartGUI extends javax.swing.JFrame {
                         .addComponent(jRadioButtonGF3)
                         .addGap(49, 49, 49)
                         .addComponent(jRadioButtonGF8)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonShowInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonGenCW, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonRowDecode))
-                        .addGap(57, 57, 57)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonColumnDecode)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 376, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -280,15 +281,26 @@ public class StartGUI extends javax.swing.JFrame {
                             .addComponent(jButtonSendZero, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Gilbert, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonRowDecode, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonColumnDecode, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonColumnDecode)
-                    .addComponent(jButtonRowDecode)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonRowDecode)
+                        .addComponent(jButtonColumnDecode))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -297,21 +309,19 @@ public class StartGUI extends javax.swing.JFrame {
                             .addComponent(jRadioButtonGF3)
                             .addComponent(jRadioButtonGF8))
                         .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jRowBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jColumnBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4))
-                                .addGap(50, 50, 50)
-                                .addComponent(jButtonShowProperties))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonShowInfo)
-                                .addGap(0, 0, 0)
-                                .addComponent(jButtonGenCW))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRowBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jColumnBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(22, 22, 22)
+                        .addComponent(jButtonShowInfo)
+                        .addGap(0, 0, 0)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonGenCW)
+                            .addComponent(jButtonShowProperties)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonSendZero)
                         .addGap(9, 9, 9)
@@ -339,14 +349,12 @@ public class StartGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
- 
     GFx objGF2 = new GFx (2);
     GFx objGF3 = new GFx (3);
     GFx objGF8 = new GFx (8);
     
     Integer [][] G_7_4_3 = new Integer[][] { {1,0,0,0,1,1,1}, {0,1,0,0,1,1,0}, {0,0,1,0,1,0,1}, {0,0,0,1,0,1,1} };
     Integer [][] G_8_2_5 = new Integer [][] { {1,0,1,1,1,1,0,0}, {0,1,1,1,0,0,1,1} };
-   
     
     public int getSelectedGF (){
         String str = "";
@@ -383,6 +391,8 @@ public class StartGUI extends javax.swing.JFrame {
             objGF2.setGColumn(G_8_2_5, 8, 2, 5);
         }
         
+        System.out.println(">>> ROW: N = " + objGF2.getN() + " K = " + objGF2.getK() + " D = " + objGF2.getD());
+        System.out.println(">>> COL: N = " + objGF2.getNCol() + " K = " + objGF2.getKCol() + " D = " + objGF2.getDCol());
     }
      
     private void jButtonShowPropertiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonShowPropertiesActionPerformed
@@ -401,7 +411,11 @@ public class StartGUI extends javax.swing.JFrame {
         } else if (GF == 3){
             jTextArea1.setText(objGF3.printProperties());
         } else if (GF == 8){
-            jTextArea1.setText(objGF8.printProperties());
+            str += objGF8.printProperties();
+            str += "\nGENERATOR MATRIX = \n" + objGF8.printAlpha(objGF8.getG());
+            jTextArea1.setText(str);
+            
+            
         }    
     }//GEN-LAST:event_jButtonShowPropertiesActionPerformed
    
@@ -425,6 +439,12 @@ public class StartGUI extends javax.swing.JFrame {
         
         // Previous actions 
         //jButtonShowPropertiesActionPerformed(evt);
+        
+        // Scroll to top. 
+        jScrollPane2.getViewport().setViewPosition(new Point(0,0));
+
+        DefaultCaret caret = (DefaultCaret) jTextArea2.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
         
         int GF = getSelectedGF ();
         if (GF < 0 ){
@@ -460,17 +480,20 @@ public class StartGUI extends javax.swing.JFrame {
               
         } else if (GF == 8){
             objGF8.generateInfoGF8();
+            String alphaInfo = objGF8.alphaGenerateInfoGF8();
             
+            /*
             String str8 = "Amount of infowords = " + objGF8.getInfo().length;
             str8 += "\nLength of infoword = " + objGF8.getInfo()[0].length + "\n\n";
             jTextArea2.setText(str8 + objGF8.printArray(objGF8.getInfo() ));
+            */
             
-            // Scroll to top. 
-            jScrollPane2.getViewport().setViewPosition(new Point(0,0));
-            
-            DefaultCaret caret = (DefaultCaret) jTextArea2.getCaret();
-            caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
-        }        
+            String str8 = "Amount of infowords = " + objGF8.getInfo().length;
+            str8 += "\nLength of infoword = " + objGF8.getInfo()[0].length + "bits. \n\n";
+            jTextArea2.setText(str8 + alphaInfo);
+   
+        }
+                
     }//GEN-LAST:event_jButtonShowInfoActionPerformed
 
     private void jButtonGenCWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenCWActionPerformed
@@ -499,16 +522,19 @@ public class StartGUI extends javax.swing.JFrame {
             str3 += "Length of a codeword = " + objGF3.getCW()[0].length;
             jTextArea2.setText(str3 + "\n\n" + objGF3.printArray(objGF3.getCW()));
         } else if (GF == 8){
+            objGF8.generateInfoGF8();
             objGF8.generateCWGF8();
             String str8 = "";
             str8 += "Length of a codeword = " + objGF8.getCW()[0].length;
             
-            jTextArea2.setText(str8 + "\n\n" + objGF8.printArray(objGF8.getCW()));
+            jTextArea2.setText(str8 + "\n\n" + objGF8.printInfoAlpha(objGF8.getCW()));
             
-            jScrollPane2.getViewport().setViewPosition(new Point(0,0));
-            DefaultCaret caret = (DefaultCaret) jTextArea2.getCaret();
-            caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
-        }           
+            
+        }
+        
+        jScrollPane2.getViewport().setViewPosition(new Point(0,0));
+        DefaultCaret caret = (DefaultCaret) jTextArea2.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
     }//GEN-LAST:event_jButtonGenCWActionPerformed
 
     
@@ -518,7 +544,6 @@ public class StartGUI extends javax.swing.JFrame {
         jButtonShowPropertiesActionPerformed(evt);
         jButtonShowInfoActionPerformed(evt);
         jButtonGenCWActionPerformed(evt);
-        
         
         int GF = getSelectedGF ();       
 //        double p = getProbability ();
@@ -542,7 +567,11 @@ public class StartGUI extends javax.swing.JFrame {
         } else if (GF == 8){
             //objGF8.fillTest();
             objGF8.fillZero();
-            jTextArea3.setText(objGF8.printArray(objGF8.getSent()));
+            Integer[][] send = objGF8.getSent();
+            String alphaString = objGF8.getAlphaString(send);
+            jTextArea3.setText(alphaString);
+            jTextArea4.setText(alphaString);
+            jTextArea5.setText(alphaString);
         }          
         
              
@@ -550,18 +579,29 @@ public class StartGUI extends javax.swing.JFrame {
 
     private void jButtonRowDecodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRowDecodeActionPerformed
         // TODO add your handling code here:
+       
+       
         int GF = getSelectedGF ();
         if (GF < 0 ){
             return;
         } else if (GF == 2){
             objGF2.rowDecode();
             jTextArea4.setText(objGF2.printArray(objGF2.getSent()));
+            jTextArea5.setText(objGF2.printArray(objGF2.getSent()));
         } else if (GF == 3){
             objGF3.rowDecode();
             jTextArea4.setText(objGF3.printArray(objGF3.getSent()));
+            jTextArea5.setText(objGF3.printArray(objGF2.getSent()));
         } else if (GF == 8){
             objGF8.rowDecode();
-            jTextArea4.setText(objGF8.printArray(objGF8.getSent()));
+            
+            Integer[][] send = objGF8.getSent();
+            String alphaString = objGF8.getAlphaString(send);
+     
+            jTextArea4.setText(alphaString);
+            jTextArea5.setText(alphaString);
+
+//            jTextArea4.setText(objGF8.printArray(objGF8.getSent()));
         }      
     }//GEN-LAST:event_jButtonRowDecodeActionPerformed
 
@@ -572,13 +612,21 @@ public class StartGUI extends javax.swing.JFrame {
             return;
         } else if (GF == 2){
             objGF2.columnDecode();
+            jTextArea4.setText(objGF2.printArray(objGF2.getSent()));
             jTextArea5.setText(objGF2.printArray(objGF2.getSent()));
         } else if (GF == 3){
             objGF3.columnDecode();
+            jTextArea4.setText(objGF3.printArray(objGF3.getSent()));
             jTextArea5.setText(objGF3.printArray(objGF3.getSent()));
         } else if (GF == 8){
             objGF8.columnDecode();
-            jTextArea5.setText(objGF8.printArray(objGF8.getSent()));
+            
+            Integer[][] send = objGF8.getSent();
+            String alphaString = objGF8.getAlphaString(send);
+            jTextArea4.setText(alphaString);
+            jTextArea5.setText(alphaString);
+            
+//            jTextArea5.setText(objGF8.printArray(objGF8.getSent()));
         }      
     }//GEN-LAST:event_jButtonColumnDecodeActionPerformed
 
@@ -614,21 +662,27 @@ public class StartGUI extends javax.swing.JFrame {
         System.out.println("Selected item row = " + jRowBox.getSelectedItem());
         
         selectG();
-        
-        
-        
+
     }//GEN-LAST:event_jRowBoxActionPerformed
 
     Integer[][] getUserErrors (){
-        // Put errorString into array. 
         
+        System.out.println(">>>>>> getUserErrors");
+        
+        // Put errorString into array. 
         String errorString = jTextArea3.getText();
-        String lines[] = errorString.split("\\r?\\n");
-//        System.out.println(lines);
+        errorString = errorString.replace("\t", "");
+        errorString = errorString.replace(" ", "");
+        
+
+//        String lines[] = errorString.split("\\r?\\n");
+        String lines[] = errorString.split("[\\r\\n]+"); // no empty lines in output
+        System.out.printf("errorString\n" + errorString);
+        
+        int lenLine = lines.length;
         
         int GF = getSelectedGF();
   
-       
         GFx obj = null;
         if (GF == 2) {
             obj = objGF2;
@@ -641,24 +695,84 @@ public class StartGUI extends javax.swing.JFrame {
         Integer[][] oldSend = obj.getSent();
         int rows = oldSend.length;
         int columns = oldSend[0].length;
-        Integer[][] userErrors = new Integer[rows][columns];
         
-        for (int row=0; row < rows; row++){
-            System.out.println(lines[row]);
+        
+        int columnsGF8 = (int)(columns / 3);
+        int rowsGF8 = (int)(rows / 3);
+        System.out.println("Rows: " + rowsGF8 + " columns: " + columnsGF8);
+        
+        Integer[][] userErrors = new Integer[rows][columns];
+        if (GF == 8){
+            userErrors = new Integer[rowsGF8][columnsGF8];
         }
-
+        
         // Fill new userError array
-        for (int row = 0; row < rows; row++){
-            for (int column = 0; column < columns; column++){
-                char userInput = lines[row].charAt(column);
-                int value  = Character.getNumericValue(userInput);
-                userErrors[row][column] = value;
+        if (GF == 8){
+                //        errorString = errorString.replace("α", "8");
+            errorString = errorString.replace("¹", "");
+            errorString = errorString.replace("²", "");
+            errorString = errorString.replace("³", "");
+            errorString = errorString.replace("⁴", "");
+            errorString = errorString.replace("⁵", "");
+            errorString = errorString.replace("⁶", "");
+            errorString = errorString.replace("⁷", "");
+        
+            
+            for (int row = 0; row < rowsGF8; row++){
+                for (int column = 0; column < columnsGF8; column++){
+//                    System.out.println("row, col " + row + column);
+                    char userInput = lines[row].charAt(column);
+                    int value  = Character.getNumericValue(userInput);
+                    
+//                    // Ignore characters that are not alpha or 0 to 7
+//                    System.out.println("char: " + userInput + " numeric value: " + value);
+//                    
+//                    // char: α numeric value: -1
+//                    if (isSame("α", userInput)){
+//  
+//                        int exponentIndex = column + 1;
+//                        char exponent = lines[row].charAt(exponentIndex);
+//                        if (isSame("α", exponent)){
+//                            value = -1;      // value = -1 is ignored by next function that translates it into a binary format. 
+//                        } else {
+//                            value = Character.getNumericValue(userInput);
+//                        }
+//            
+//                    }
+ 
+                    // Only allow values from 0 to 7 as exponent.
+                    if (value < 0 || value > 7){
+                        value = -1;
+                    }
+                    
+                    System.out.println("exponent updated to: " + value);
+                    userErrors[row][column] = value;
+                }
+            }
+        
+        } else if (GF != 8){
+            for (int row = 0; row < rows; row++){
+                for (int column = 0; column < columns; column++){
+                    char userInput = lines[row].charAt(column);
+                    int value  = Character.getNumericValue(userInput);
+                    userErrors[row][column] = value;
+                }
             }
         }
+        
         return userErrors;
     }
     
+    public boolean isSame(String s, char c) {
+        if (s != null && s.length() == 1 && s.charAt(0) == c) { 
+            System.out.println(s + " == " + c + " is true");
+            return true;
+        }
+        return false;
+    }
+    
     private void setTextSent(int GF){
+       
         if (GF < 0 ){
             return;
         } else if (GF == 2){
@@ -671,25 +785,37 @@ public class StartGUI extends javax.swing.JFrame {
             jTextArea4.setText(objGF3.printArray(objGF3.getSent()));
             jTextArea5.setText(objGF3.printArray(objGF3.getSent()));
         } else if (GF == 8){
-            //objGF8.fillTest();
-            jTextArea3.setText(objGF8.printArray(objGF8.getSent()));
-            jTextArea4.setText(objGF8.printArray(objGF8.getSent()));
-            jTextArea5.setText(objGF8.printArray(objGF8.getSent()));
+//            objGF8.fillTest();
+//            jTextArea3.setText(objGF8.printArray(objGF8.getSent()));
+//            jTextArea4.setText(objGF8.printArray(objGF8.getSent()));
+//            jTextArea5.setText(objGF8.printArray(objGF8.getSent()));
+
+            Integer[][] send = objGF8.getSent();
+            String alphaString = objGF8.getAlphaString(send);
+            jTextArea3.setText(alphaString);
+            jTextArea4.setText(alphaString);
+            jTextArea5.setText(alphaString);
         }          
     }
-   
+    
+    private void setTabSize(){
+        jTextArea3.setTabSize(6);
+        jTextArea4.setTabSize(6);
+        jTextArea5.setTabSize(6);
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Prev actions
         //jButtonGenCWActionPerformed(evt);
-
+        int GFSelected = getSelectedGF();
+            
         // Print user induced errors
-        objGF2.setSent(getUserErrors());
-        objGF3.setSent(getUserErrors());
-        objGF8.setSent(getUserErrors());
-        
+        if (GFSelected == 2)    objGF2.setSent(getUserErrors());
+        if (GFSelected == 3)    objGF3.setSent(getUserErrors());
+        if (GFSelected == 8)    objGF8.setAlphaErrors(getUserErrors());
+        //objGF8.setSent(getUserErrors());   
+
         setTextSent(getSelectedGF());
-        
-       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jColumnBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jColumnBoxActionPerformed
@@ -715,9 +841,7 @@ public class StartGUI extends javax.swing.JFrame {
         double pGG = getPGG();
         double pBB = getPBB();
         boolean validInput = true;
-        
-//        JOptionPane.showMessageDialog(null, "pGG = " + pGG + "pBB = " + pBB);
-        
+                
         // pGG and pBB are set to -1.0 if user imput is empty.
         if (pGG < 0.0 || pBB < 0.0){
             validInput = false;
@@ -755,9 +879,16 @@ public class StartGUI extends javax.swing.JFrame {
             } else if (GF == 8){
                 //objGF8.fillTest();
                 objGF8.fillGilbert(pGG, pBB);
-                jTextArea3.setText(objGF8.printArray(objGF8.getSent()));
-                jTextArea4.setText(objGF8.printArray(objGF8.getSent()));
-                jTextArea5.setText(objGF8.printArray(objGF8.getSent()));
+                
+                Integer[][] send = objGF8.getSent();
+                String alphaString = objGF8.getAlphaString(send);
+                jTextArea3.setText(alphaString);
+                jTextArea4.setText(alphaString);
+                jTextArea5.setText(alphaString);
+                
+//                jTextArea3.setText(objGF8.printArray(objGF8.getSent()));
+//                jTextArea4.setText(objGF8.printArray(objGF8.getSent()));
+//                jTextArea5.setText(objGF8.printArray(objGF8.getSent()));
             }
         }
     }//GEN-LAST:event_GilbertActionPerformed
@@ -799,6 +930,8 @@ public class StartGUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(StartGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

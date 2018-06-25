@@ -5,10 +5,17 @@
  */
 package AppPackage;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.font.TextAttribute;
+import java.text.AttributedString;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.Random;
+import java.util.List;
+import javax.swing.JPanel;
 
 /**
  *
@@ -43,6 +50,31 @@ private int dColumn;
 
 private int GF;
 
+// ALPHA MATRICES
+private String [] alphaMat;
+
+// Replace alpha
+private Integer [][] alpha_zero = {{0,0,0}, {0,0,0}, {0,0,0}};
+private Integer [][] alpha_0 = {{1,0,0}, {0,1,0}, {0,0,1}};
+private Integer [][] alpha_1 = {{0,1,0}, {0,0,1}, {1,1,0}};
+private Integer [][] alpha_2 = {{0,0,1}, {1,1,0}, {0,1,1}};
+private Integer [][] alpha_3 = {{1,1,0}, {0,1,1}, {1,1,1}};
+private Integer [][] alpha_4 = {{0,1,1}, {1,1,1}, {1,0,1}};
+private Integer [][] alpha_5 = {{1,1,1}, {1,0,1}, {1,0,0}};
+private Integer [][] alpha_6 = {{1,0,1}, {1,0,0}, {0,0,0}};
+private Integer [][] alpha_7 = {{1,0,0}, {0,0,0}, {0,1,0}};
+
+// Replace alpha
+private Integer [] a_zero = {0,0,0};
+private Integer [] a_0 = {1,0,0};
+private Integer [] a_1 = {0,1,0};
+private Integer [] a_2 = {0,0,1};
+private Integer [] a_3 = {1,1,0};
+private Integer [] a_4 = {0,1,1};
+private Integer [] a_5 = {1,1,1};
+private Integer [] a_6 = {1,0,1};
+private Integer [] a_7 = {1,0,0};
+
 GFx (int _GF) {
     
     this.GF = _GF;
@@ -69,7 +101,7 @@ GFx (int _GF) {
             {0,0,0, 0,0,0, 1,1,0, 0,1,0, 1,0,0, 1,1,0, 1,0,0},
             {0,0,0, 0,0,0, 0,1,1, 0,0,1, 0,1,0, 0,1,1, 0,1,0},
             {0,0,0, 0,0,0, 1,1,1, 1,1,0, 0,0,1, 1,1,1, 0,0,1}      
-        }; // From slide 4.24         
+        }; // From slide 4.24
         }
 }
 
@@ -129,6 +161,18 @@ public int getK () {
 
 public int getD () {
     return this.d;
+}
+
+public int getNCol () {
+    return this.nColumn;
+}
+
+public int getKCol () {
+    return this.kColumn;
+}
+
+public int getDCol () {
+    return this.dColumn;
 }
 
 public int getGF () {
@@ -259,15 +303,16 @@ public void generateInfoColumn () {
 }
 
 public void generateInfoGF8 (){
+       
     final int N = 9;
     LinkedList<String> list = new LinkedList<String>();
     String infoWord = "";
     
     // Fill list with info words
     for (int i=0; i < (1 << N); i++){
-             list.add(zeroPad(Integer.toBinaryString(i), N));
+          list.add(zeroPad(Integer.toBinaryString(i), N));
     }
-
+    
     // Fill array [][] this.Info with info words
     int rows = (int) Math.pow(2, N);
     this.Info = new Integer[rows][G.length];
@@ -284,8 +329,64 @@ public void generateInfoGF8 (){
                         }
                 }
         }
-        //System.out.println("CW rows = " + Info.length + " Info columns = " + Info[0].length);
-        //System.out.println(Arrays.deepToString(this.Info));  
+//        System.out.println("CW rows = " + Info.length + " Info columns = " + Info[0].length);
+//        System.out.println(Arrays.deepToString(this.Info));  
+}
+
+public String alphaGenerateInfoGF8(){
+    // Fancy print now
+    final int N = 9;
+    // Fill array [][] this.Info with info words
+    int rows = (int) Math.pow(2, N);
+    this.Info = new Integer[rows][G.length];
+    
+    
+    // Create alpha notation matrix so a 3 by 3.
+    Integer[][] alphaMatrix = new Integer[rows][3];
+    
+    int indexInfo = 0;
+    for(int i=0; i<8; i++){
+        for(int j=0; j<8; j++){
+            for(int k=0; k<8; k++){
+                alphaMatrix[indexInfo][0] = i;
+                alphaMatrix[indexInfo][1] = j;
+                alphaMatrix[indexInfo][2] = k;
+                indexInfo++;
+            }
+        }
+    }
+    
+    // Create fancy print
+    
+    String[] alpha = {"0", "1", "α", "α²", "α³", "α⁴", "α⁵", "α⁶", "α⁷" };
+    String str = "";
+    
+    for (Integer[] row : alphaMatrix){
+            //System.out.println(row[0] + "," + row[1] + "," + row[2]);
+            
+            // Corner case to acces last elem of alpha replace array
+            if (row[0] == 7) row[0] = 8;
+            if (row[1] == 7) row[1] = 8;
+            if (row[2] == 7) row[2] = 8;
+            
+            
+            str += alpha[row[0]];
+            str += alpha[row[1]];
+            str += alpha[row[2]] + "\n";
+    }
+    
+    return str;
+}
+
+public List<String> makeSequence(int begin, int end) {
+  List<String> ret = new ArrayList(end - begin + 1);
+  String str = "";
+  
+  for(int i = begin; i < end; i++){
+      ret.add(String.format("%03d", i % 8));
+   }
+
+  return ret;  
 }
 
 public Integer[] testMult () {
@@ -380,7 +481,11 @@ public void generateCWColumn () {
 public void generateCWGF8 () {
         // Multiply Info with G and store result in CW array.
         this.CW = new Integer[this.Info.length][this.G[0].length];
-
+        
+//        System.out.println("Info = " + Arrays.deepToString(this.Info)); 
+//        System.out.println("CW = " + Arrays.deepToString(this.CW));
+//        System.out.println("G = " + Arrays.deepToString(this.G));
+        
         int sum = 0;
         for (int i = 0; i < Info.length; i++){
                 for (int j = 0; j < G[0].length; j++){
@@ -395,23 +500,228 @@ public void generateCWGF8 () {
         
         this.CWColumn = this.CW;
         
-//        System.out.println("Length of CW should be 21 and is: " + CW[0].length);
+        System.out.println("Length of CW should be 21 and is: " + CW[0].length);
 }
+
+
 
 public String printArray (Integer [][] array){
 
-        int rows = array.length;
-        int columns = array[0].length;
+    int rows = array.length;
+    int columns = array[0].length;
 
-        StringBuilder str = new StringBuilder();
+    StringBuilder str = new StringBuilder();
 
-        for (int row = 0; row < rows; row++){
-                for (int column = 0; column < columns; column++){
-                        str.append(array[row][column]);
-                }
-                str.append(System.getProperty("line.separator"));
+    for (int row = 0; row < rows; row++){
+            for (int column = 0; column < columns; column++){
+                    str.append(array[row][column]);
+                    str.append(" ");
+            }
+            str.append(System.getProperty("line.separator"));
+    }
+
+    return str.toString();
+}
+
+public void setAlphaErrors(Integer[][] userErrors){
+    // Convert 7 to alpha^7 in binary notation.
+ 
+    //    System.out.println(userErrors.length);
+//    System.out.println("userErrors used to update binary errors: \n" + Arrays.deepToString(userErrors));
+//    System.out.println(Arrays.deepToString(Sent));
+    
+    String str = "";
+    int rows = userErrors.length;
+    int columns = userErrors[0].length;
+    
+    for (int i=0; i< rows; i++){
+        for (int j = 0; j < columns; j++){
+            int indexBinary = j*3;
+            Integer alpha = userErrors[i][j];
+ 
+            updateSentGF8(i, indexBinary, alpha);
+            str += userErrors[i][j];
         }
-        return str.toString();
+        System.out.println("setAlphaErrors: " + str);
+        str = "";
+    }
+    
+
+    
+}
+
+public void updateSentGF8(int row, int index, Integer alpha){
+    
+    if (alpha == -1){
+        return;
+    }
+    
+    if (alpha == 0) {
+        Sent[row][index] = 0;
+        Sent[row][index +1] = 0;
+        Sent[row][index + 2] = 0;     
+    }
+    
+    if (alpha == 1) {
+        Sent[row][index] = 0;
+        Sent[row][index +1] = 1;
+        Sent[row][index + 2] = 0;     
+    }
+    
+    if (alpha == 2) {
+        Sent[row][index] = 0;
+        Sent[row][index +1] = 0;
+        Sent[row][index + 2] = 1;     
+    }
+    
+    if (alpha == 3) {
+        Sent[row][index] = 1;
+        Sent[row][index +1] = 1;
+        Sent[row][index + 2] = 0;        
+    }
+    
+    if (alpha == 4) {
+        Sent[row][index] = 0;
+        Sent[row][index +1] = 1;
+        Sent[row][index + 2] = 1;     
+    }
+    
+    if (alpha == 5) {
+        Sent[row][index] = 1;
+        Sent[row][index +1] = 1;
+        Sent[row][index + 2] = 1;     
+    }
+    
+    if (alpha == 6) {
+        Sent[row][index] = 1;
+        Sent[row][index +1] = 0;
+        Sent[row][index + 2] = 1;     
+    }
+    
+    if (alpha == 7) {
+        Sent[row][index] = 1;
+        Sent[row][index +1] = 0;
+        Sent[row][index + 2] = 0;     
+    } 
+}
+
+public String printInfoAlpha(Integer[][] array){
+    int rows = array.length;
+    int columns = array[0].length;
+
+    StringBuilder str = new StringBuilder();
+    
+    for(int row=0; row < rows; row++){
+        for(int col=0; col < columns; col += 3){
+            str.append(getAlphaInfo(array, row, col));         
+        }
+        str.append(System.getProperty("line.separator"));
+    }
+    
+    return str.toString();
+}
+
+public String getAlphaInfo(Integer[][] array, int row, int column){
+    
+    Integer [] read = {0,0,0};
+    String str = "";
+    
+    for (int i=0; i < 3; i++){
+        read[i] = array[row][column + i];
+    }
+    
+    // Compare read to hardcoded alpha's 
+    if (Arrays.deepEquals(read, a_zero)) str = "0";
+    if (Arrays.deepEquals(read, a_0)) str ="1";
+    if (Arrays.deepEquals(read, a_1)) str ="α¹";
+    if (Arrays.deepEquals(read, a_2)) str = "α²";
+    if (Arrays.deepEquals(read, a_3)) str = "α³";
+    if (Arrays.deepEquals(read, a_4)) str = "α⁴";
+    if (Arrays.deepEquals(read, a_5)) str = "α⁵";
+    if (Arrays.deepEquals(read, a_6)) str = "α⁶";
+    if (Arrays.deepEquals(read, a_7)) str = "α⁷";
+    
+    return str;
+}
+
+public String printAlpha (Integer [][] array){
+
+    int rows = array.length;
+    int columns = array[0].length;
+    int slidingWindow = 3;
+
+    StringBuilder str = new StringBuilder();
+    String nGram = "";
+
+    // Loop through corner indices of 3 by 3 parts of the array.
+    for (int row=0; row < rows; row += 3){
+        for (int col=0; col < columns; col += 3){
+            //System.out.println("Corner indices: " + row + ", " + col );
+            str.append(read_3_3_array(array, row, col));
+        }
+        str.append(System.getProperty("line.separator"));
+    }
+    return str.toString();
+}
+
+public String getAlphaString(Integer[][] array){
+    
+    int rows = array.length;
+    int columns = array[0].length;
+    int slidingWindow = 3;
+
+    StringBuilder str = new StringBuilder();
+    String nGram = "";
+   
+    for (int row = 0; row < 7; row++){
+            for (int column = 0; column < columns; column += 3){
+                    // Create an n-gram
+                    //str = str.append(array[row][column] + array[row][column +1] + array[row][column + 2]);
+                    nGram = "";
+                    nGram = nGram.concat(array[row][column].toString() + array[row][column +1].toString() + array[row][column + 2].toString());
+
+                    nGram = nGram.replaceAll("000", "0  \t");
+                    nGram = nGram.replaceAll("010", "α  \t");
+                    nGram = nGram.replaceAll("001", "α²\t");
+                    nGram = nGram.replaceAll("110", "α³\t");
+                    nGram = nGram.replaceAll("011", "α⁴\t");
+                    nGram = nGram.replaceAll("111", "α⁵\t");
+                    nGram = nGram.replaceAll("101", "α⁶\t");
+                    nGram = nGram.replaceAll("100", "α⁷\t");
+
+                    str.append(nGram);
+
+            }
+            str.append(System.getProperty("line.separator"));
+    }
+    
+    return str.toString();
+}
+
+public String read_3_3_array(Integer[][] array, int row, int column){
+    // Read 3x3 array and return alpha notation
+    
+    Integer [][] read = {{0,0,0}, {0,0,0}, {0,0,0}};
+    String str = "";
+    
+    for (int i=0; i < 3; i++){
+        for (int j=0; j < 3; j++){
+            read[i][j] = array[row + i][column + j];
+        }
+    }
+    
+    // Compare read to hardcoded alpha's 
+    if (Arrays.deepEquals(read, alpha_zero)) str = "0";
+    if (Arrays.deepEquals(read, alpha_0)) str ="1";
+    if (Arrays.deepEquals(read, alpha_1)) str ="α";
+    if (Arrays.deepEquals(read, alpha_2)) str = "α²";
+    if (Arrays.deepEquals(read, alpha_3)) str = "α³";
+    if (Arrays.deepEquals(read, alpha_4)) str = "α⁴";
+    if (Arrays.deepEquals(read, alpha_5)) str = "α⁵";
+    if (Arrays.deepEquals(read, alpha_6)) str = "α⁶";
+    if (Arrays.deepEquals(read, alpha_7)) str = "α⁷";
+    
+    return str;
 }
 
 public void fillProbability (double p) {
@@ -467,6 +777,15 @@ public void fillGilbert(double pGG, double pBB){
             if (goodState == 0) {
                 Sent1[j] = 1;
             }
+            
+            // If GF3 then erros may be 0,1 or 2
+            if (goodState == 0 && this.GF == 3){
+                int result = 1;
+                if (chance < 0.5) { result = 2;}
+               
+                Sent1[j] = result;
+            }
+            
         }
     }
     
@@ -561,29 +880,33 @@ public int compareColumn (int column) {
 }
 
 public void rowDecode (){
-        int index;
-        
-        //System.out.println("Rows in Sent = " + Sent.length);
-        for (int i = 0; i < Sent.length; i++){
-                index = compareRow(i);
-                // swap row of Sent[index][] with CW[index][]
-                for (int j = 0; j < Sent[0].length; j++){
-                        Sent[i][j] = CW[index][j];
-                }
-        }
+    int index;
+    int rows = Sent.length;
+    int columns = Sent[0].length;
+    
+    //System.out.println("Rows in Sent = " + Sent.length);
+    for (int i = 0; i < rows; i++){
+            index = compareRow(i);
+            // swap row of Sent[index][] with CW[index][]
+            for (int j = 0; j < columns; j++){
+                    Sent[i][j] = CW[index][j];
+            }
+    }
 }
 
 public void columnDecode () {	
-        int column;
-
-        //System.out.println("Columns in Sent = " + Sent[0].length);
-        // Loop through all columns in Sent[][]
-        for (int i = 0; i < Sent[0].length; i++){
-                column = compareColumn(i);
-                // Change column of Sent[][i] to row of CW[i][]
-                for (int j = 0; j < Sent[0].length; j++){
-                        Sent[j][i] = CWColumn[column][j];
-                }
-        }
+    int column;
+    int rows = Sent.length;
+    int columns = Sent[0].length;
+    
+    // Loop through all columns in Sent[][]
+    for (int i = 0; i < columns; i++){
+            column = compareColumn(i);
+            // Change column of Sent[][i] to row of CW[i][]
+            for (int j = 0; j < rows; j++){
+                    Sent[j][i] = CWColumn[column][j];
+            }
+    }
 }
+
 }
