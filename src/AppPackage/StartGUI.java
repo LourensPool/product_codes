@@ -150,14 +150,14 @@ public class StartGUI extends javax.swing.JFrame {
             }
         });
 
-        jRowBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(7; 4; 3)", "(8; 2; 5)" }));
+        jRowBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(6; 4; 2)", "(7; 4; 3)", "(8; 4; 4)", "(8; 2; 5)" }));
         jRowBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRowBoxActionPerformed(evt);
             }
         });
 
-        jColumnBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(7; 4; 3)", "(8; 2; 5)" }));
+        jColumnBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(6; 4; 2)", "(7; 4; 3)", "(8; 4; 4)", "(8; 2; 5)" }));
         jColumnBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jColumnBoxActionPerformed(evt);
@@ -353,8 +353,11 @@ public class StartGUI extends javax.swing.JFrame {
     GFx objGF3 = new GFx (3);
     GFx objGF8 = new GFx (8);
     
+    Integer [][] G_6_4_2 = new Integer[][] { {1,0,0,0,1,1}, {0,1,0,0,1,1}, {0,0,1,0,1,0}, {0,0,0,1,0,1}  };
     Integer [][] G_7_4_3 = new Integer[][] { {1,0,0,0,1,1,1}, {0,1,0,0,1,1,0}, {0,0,1,0,1,0,1}, {0,0,0,1,0,1,1} };
+    Integer [][] G_8_4_4 = new Integer[][] { {1,0,0,0,1,1,1,0}, {0,1,0,0,1,1,0,1}, {0,0,1,0,1,0,1,1}, {0,0,0,1,0,1,1,1} };
     Integer [][] G_8_2_5 = new Integer [][] { {1,0,1,1,1,1,0,0}, {0,1,1,1,0,0,1,1} };
+    
     
     public int getSelectedGF (){
         String str = "";
@@ -379,15 +382,37 @@ public class StartGUI extends javax.swing.JFrame {
     
     public void selectG () {
         
+        // Row
+        if (jRowBox.getSelectedItem() == "(6; 4; 2)"){
+            objGF2.setG(G_6_4_2, 6, 4, 2);
+        } 
+        
+        if (jRowBox.getSelectedItem() == "(8; 4; 4)"){
+            objGF2.setG(G_8_4_4, 8, 4, 4);
+        } 
+        
         if (jRowBox.getSelectedItem() == "(7; 4; 3)") {
             objGF2.setG(G_7_4_3, 7, 4, 3);
-        } else if (jRowBox.getSelectedItem() == "(8; 2; 5)"){
+        } 
+        
+        if (jRowBox.getSelectedItem() == "(8; 2; 5)"){
             objGF2.setG(G_8_2_5, 8, 2, 5);
+        }
+        
+        // Column
+        if (jColumnBox.getSelectedItem() == "(6; 4; 2)"){
+            objGF2.setGColumn(G_6_4_2, 6, 4, 2);
+        }
+        
+         if (jColumnBox.getSelectedItem() == "(8; 4; 4)"){
+            objGF2.setGColumn(G_8_4_4, 8, 4, 4);
         }
         
         if (jColumnBox.getSelectedItem() == "(7; 4; 3)") {
             objGF2.setGColumn(G_7_4_3, 7, 4, 3);
-        } else if (jColumnBox.getSelectedItem() == "(8; 2; 5)"){
+        }     
+        
+        if (jColumnBox.getSelectedItem() == "(8; 2; 5)"){
             objGF2.setGColumn(G_8_2_5, 8, 2, 5);
         }
         
@@ -632,6 +657,7 @@ public class StartGUI extends javax.swing.JFrame {
 
     private double getPGG () {
         String str = pGG.getText();
+        str = str.replace(",", ".");
         
         if (str.isEmpty() == false){
             double p = Double.parseDouble(str);
@@ -644,6 +670,7 @@ public class StartGUI extends javax.swing.JFrame {
     
     private double getPBB () {
         String str = pBB.getText();
+        str = str.replace(",", ".");
         
         if (str.isEmpty() == false){
             double p = Double.parseDouble(str);

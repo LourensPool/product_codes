@@ -185,18 +185,22 @@ public String printProperties () {
     float rateSingle = (float) this.k / (float) this.n;
     float rateProduct = (float) (this.k * this.kColumn ) / (float) (this.n * this.nColumn);
     int errorCorrection = (this.d -1 )/2;
+    int errorDetection = this.d - 1;
     
     float rateColumn = (float) this.kColumn / (float) this.nColumn;
     int errorCorrectionColumn = (this.dColumn -1) /2;
+    int errorDetectionColumn = this.dColumn - 1;
     
     str.append("Rows are sent as: \n");
     str.append("(n, k, d) --> (" + this.n + " ," + this.k + " ," + this.d + ") codes.\n");
     str.append("Each row can correct " + errorCorrection + " error(s). \n" );
+    str.append("Each row can detect  "+ errorDetection + " error(s)\n");
     str.append("Code rate = " + String.format("%.2f", rateSingle) + "\n\n");
     
     if (GF == 2){
         str.append("Columns are sent as (" + this.nColumn + " ," + this.kColumn + " ," + this.dColumn + ") codes.\n" );
         str.append("Each column can correct " + errorCorrectionColumn + " error(s)\n");
+        str.append("Each column can detect " + errorDetectionColumn + " error(s)\n");
         str.append("Code rate = " + String.format("%.2f", rateColumn) + "\n");
 
         str.append("\nRODUCT CODE PROPERTIES:\n" + "(" + this.n * this.nColumn + " ," + this.k * this.kColumn + " ," + this.d * this.dColumn + ")\n" );
