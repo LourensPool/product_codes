@@ -203,11 +203,11 @@ public String printProperties () {
         str.append("Each column can detect " + errorDetectionColumn + " error(s)\n");
         str.append("Code rate = " + String.format("%.2f", rateColumn) + "\n");
 
-        str.append("\nRODUCT CODE PROPERTIES:\n" + "(" + this.n * this.nColumn + " ," + this.k * this.kColumn + " ," + this.d * this.dColumn + ")\n" );
+        str.append("\nPRODUCT CODE PROPERTIES:\n" + "(" + this.n * this.nColumn + " ," + this.k * this.kColumn + " ," + this.d * this.dColumn + ")\n" );
         str.append("Code rate = " + String.format("%.2f", rateProduct) +"\n" );     
     } else {
         float rateEqualProduct =  (float) (this.k * this.k ) / (float) (this.n * this.n);
-        str.append("\nRODUCT CODE PROPERTIES:\n" + "(" + this.n * this.n + " ," + this.k * this.k + " ," + this.d * this.d + ")\n" );
+        str.append("\nPRODUCT CODE PROPERTIES:\n" + "(" + this.n * this.n + " ," + this.k * this.k + " ," + this.d * this.d + ")\n" );
         str.append("Code rate = " + String.format("%.2f", rateEqualProduct ) +"\n" );
     }
     
@@ -685,7 +685,7 @@ public String getAlphaString(Integer[][] array){
                     nGram = nGram.concat(array[row][column].toString() + array[row][column +1].toString() + array[row][column + 2].toString());
 
                     nGram = nGram.replaceAll("000", "0  \t");
-                    nGram = nGram.replaceAll("010", "α  \t");
+                    nGram = nGram.replaceAll("010", "α¹\t");
                     nGram = nGram.replaceAll("001", "α²\t");
                     nGram = nGram.replaceAll("110", "α³\t");
                     nGram = nGram.replaceAll("011", "α⁴\t");

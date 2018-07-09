@@ -70,6 +70,7 @@ public class StartGUI extends javax.swing.JFrame {
         Gilbert = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -177,32 +178,32 @@ public class StartGUI extends javax.swing.JFrame {
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Ubuntu Light", 0, 23)); // NOI18N
+        jTextArea1.setFont(new java.awt.Font("Ubuntu Light", 0, 22)); // NOI18N
         jTextArea1.setRows(5);
         jScrollPane4.setViewportView(jTextArea1);
 
         jTextArea2.setEditable(false);
         jTextArea2.setColumns(19);
-        jTextArea2.setFont(new java.awt.Font("Ubuntu Light", 0, 23)); // NOI18N
+        jTextArea2.setFont(new java.awt.Font("Ubuntu Light", 0, 22)); // NOI18N
         jTextArea2.setRows(5);
         jScrollPane1.setViewportView(jTextArea2);
 
         jTextArea3.setColumns(10);
-        jTextArea3.setFont(new java.awt.Font("Ubuntu Light", 0, 23)); // NOI18N
+        jTextArea3.setFont(new java.awt.Font("Ubuntu Light", 0, 22)); // NOI18N
         jTextArea3.setRows(5);
         jTextArea3.setTabSize(1);
         jScrollPane2.setViewportView(jTextArea3);
 
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(10);
-        jTextArea4.setFont(new java.awt.Font("Ubuntu Light", 0, 23)); // NOI18N
+        jTextArea4.setFont(new java.awt.Font("Ubuntu Light", 0, 22)); // NOI18N
         jTextArea4.setRows(5);
         jTextArea4.setTabSize(1);
         jScrollPane3.setViewportView(jTextArea4);
 
         jTextArea5.setEditable(false);
         jTextArea5.setColumns(10);
-        jTextArea5.setFont(new java.awt.Font("Ubuntu Light", 0, 23)); // NOI18N
+        jTextArea5.setFont(new java.awt.Font("Ubuntu Light", 0, 22)); // NOI18N
         jTextArea5.setRows(5);
         jTextArea5.setTabSize(1);
         jScrollPane5.setViewportView(jTextArea5);
@@ -230,6 +231,8 @@ public class StartGUI extends javax.swing.JFrame {
 
         jLabel5.setText("Probability to stay in the error state");
 
+        jLabel6.setText("Only for GF 2:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -238,26 +241,23 @@ public class StartGUI extends javax.swing.JFrame {
                 .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonShowProperties, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(49, 49, 49)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(81, 81, 81)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButtonShowInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButtonGenCW, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jRowBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jColumnBox, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
+                                .addGap(36, 36, 36)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jRowBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jColumnBox, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel6)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
+                            .addComponent(jButtonShowProperties, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(55, 55, 55)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jButtonGenCW, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonShowInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jRadioButtonGF2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -266,31 +266,29 @@ public class StartGUI extends javax.swing.JFrame {
                         .addGap(49, 49, 49)
                         .addComponent(jRadioButtonGF8)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 376, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(pBB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(pGG, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jButtonSendZero, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Gilbert, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonRowDecode, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonColumnDecode, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pBB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pGG, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButtonSendZero, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Gilbert, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                    .addComponent(jButtonRowDecode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                    .addComponent(jButtonColumnDecode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -298,9 +296,7 @@ public class StartGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButtonRowDecode)
-                        .addComponent(jButtonColumnDecode))
+                    .addComponent(jButtonColumnDecode)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -308,7 +304,9 @@ public class StartGUI extends javax.swing.JFrame {
                             .addComponent(jRadioButtonGF2)
                             .addComponent(jRadioButtonGF3)
                             .addComponent(jRadioButtonGF8))
-                        .addGap(36, 36, 36)
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jRowBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
@@ -316,9 +314,7 @@ public class StartGUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jColumnBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
-                        .addGap(22, 22, 22)
-                        .addComponent(jButtonShowInfo)
-                        .addGap(0, 0, 0)
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonGenCW)
                             .addComponent(jButtonShowProperties)))
@@ -331,11 +327,15 @@ public class StartGUI extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(pGG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(pBB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonShowInfo, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(pBB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Gilbert)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Gilbert)
+                            .addComponent(jButtonRowDecode))))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane5)
@@ -419,6 +419,24 @@ public class StartGUI extends javax.swing.JFrame {
         System.out.println(">>> ROW: N = " + objGF2.getN() + " K = " + objGF2.getK() + " D = " + objGF2.getD());
         System.out.println(">>> COL: N = " + objGF2.getNCol() + " K = " + objGF2.getKCol() + " D = " + objGF2.getDCol());
     }
+    
+    private void showBoxes(int choice){
+        
+        if (choice == 1){
+            jLabel3.setVisible(true);
+            jLabel4.setVisible(true);
+            jLabel6.setVisible(true);
+            jRowBox.setVisible(true);
+            jColumnBox.setVisible(true);
+        } else {
+            jLabel3.setVisible(false);
+            jLabel4.setVisible(false);
+            jLabel6.setVisible(false);
+            jRowBox.setVisible(false);
+            jColumnBox.setVisible(false);
+        }
+        
+    }
      
     private void jButtonShowPropertiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonShowPropertiesActionPerformed
         // TODO add your handling code here:
@@ -430,11 +448,11 @@ public class StartGUI extends javax.swing.JFrame {
         }
         else if (GF == 2){
             str += objGF2.printProperties();
-            str += "\nROW MATRIX = \n" + objGF2.printG();
+            str += "\nROW MATRIX = \n" + objGF2.printArray(objGF2.getG());
             str += "\nCOLUMN MATRIX = \n" + objGF2.printArray(objGF2.getGColumn());
             jTextArea1.setText(str);
         } else if (GF == 3){
-            jTextArea1.setText(objGF3.printProperties());
+            jTextArea1.setText(objGF3.printProperties() + "\nGENERATOR MATRIX = \n" + objGF3.printArray(objGF3.getG()));
         } else if (GF == 8){
             str += objGF8.printProperties();
             str += "\nGENERATOR MATRIX = \n" + objGF8.printAlpha(objGF8.getG());
@@ -447,16 +465,17 @@ public class StartGUI extends javax.swing.JFrame {
     
     private void jRadioButtonGF2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonGF2ActionPerformed
         // TODO add your handling code here:
-       
+        showBoxes(1);
     }//GEN-LAST:event_jRadioButtonGF2ActionPerformed
 
     private void jRadioButtonGF3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonGF3ActionPerformed
         // TODO add your handling code here:
+        showBoxes(0);
     }//GEN-LAST:event_jRadioButtonGF3ActionPerformed
 
     private void jRadioButtonGF8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonGF8ActionPerformed
         // TODO add your handling code here:
-     
+        showBoxes(0);
     }//GEN-LAST:event_jRadioButtonGF8ActionPerformed
 
     private void jButtonShowInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonShowInfoActionPerformed
@@ -616,7 +635,7 @@ public class StartGUI extends javax.swing.JFrame {
         } else if (GF == 3){
             objGF3.rowDecode();
             jTextArea4.setText(objGF3.printArray(objGF3.getSent()));
-            jTextArea5.setText(objGF3.printArray(objGF2.getSent()));
+            jTextArea5.setText(objGF3.printArray(objGF3.getSent()));
         } else if (GF == 8){
             objGF8.rowDecode();
             
@@ -637,18 +656,18 @@ public class StartGUI extends javax.swing.JFrame {
             return;
         } else if (GF == 2){
             objGF2.columnDecode();
-            jTextArea4.setText(objGF2.printArray(objGF2.getSent()));
+//            jTextArea4.setText(objGF2.printArray(objGF2.getSent()));
             jTextArea5.setText(objGF2.printArray(objGF2.getSent()));
         } else if (GF == 3){
             objGF3.columnDecode();
-            jTextArea4.setText(objGF3.printArray(objGF3.getSent()));
+//            jTextArea4.setText(objGF3.printArray(objGF3.getSent()));
             jTextArea5.setText(objGF3.printArray(objGF3.getSent()));
         } else if (GF == 8){
             objGF8.columnDecode();
             
             Integer[][] send = objGF8.getSent();
             String alphaString = objGF8.getAlphaString(send);
-            jTextArea4.setText(alphaString);
+//            jTextArea4.setText(alphaString);
             jTextArea5.setText(alphaString);
             
 //            jTextArea5.setText(objGF8.printArray(objGF8.getSent()));
@@ -687,9 +706,7 @@ public class StartGUI extends javax.swing.JFrame {
     private void jRowBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRowBoxActionPerformed
         // TODO add your handling code here:
         System.out.println("Selected item row = " + jRowBox.getSelectedItem());
-        
         selectG();
-
     }//GEN-LAST:event_jRowBoxActionPerformed
 
     Integer[][] getUserErrors (){
@@ -698,11 +715,21 @@ public class StartGUI extends javax.swing.JFrame {
         
         // Put errorString into array. 
         String errorString = jTextArea3.getText();
+        
+        errorString = errorString.replace("α", "");
+        
+        errorString = errorString.replace("¹", "1");
+        errorString = errorString.replace("²", "2");
+        errorString = errorString.replace("³", "3");
+        errorString = errorString.replace("⁴", "4");
+        errorString = errorString.replace("⁵", "5");
+        errorString = errorString.replace("⁶", "6");
+        errorString = errorString.replace("⁷", "7");
+
+//        String lines[] = errorString.split("\\r?\\n");
         errorString = errorString.replace("\t", "");
         errorString = errorString.replace(" ", "");
         
-
-//        String lines[] = errorString.split("\\r?\\n");
         String lines[] = errorString.split("[\\r\\n]+"); // no empty lines in output
         System.out.printf("errorString\n" + errorString);
         
@@ -721,8 +748,7 @@ public class StartGUI extends javax.swing.JFrame {
      
         Integer[][] oldSend = obj.getSent();
         int rows = oldSend.length;
-        int columns = oldSend[0].length;
-        
+        int columns = oldSend[0].length;  
         
         int columnsGF8 = (int)(columns / 3);
         int rowsGF8 = (int)(rows / 3);
@@ -735,44 +761,18 @@ public class StartGUI extends javax.swing.JFrame {
         
         // Fill new userError array
         if (GF == 8){
-                //        errorString = errorString.replace("α", "8");
-            errorString = errorString.replace("¹", "");
-            errorString = errorString.replace("²", "");
-            errorString = errorString.replace("³", "");
-            errorString = errorString.replace("⁴", "");
-            errorString = errorString.replace("⁵", "");
-            errorString = errorString.replace("⁶", "");
-            errorString = errorString.replace("⁷", "");
-        
-            
             for (int row = 0; row < rowsGF8; row++){
                 for (int column = 0; column < columnsGF8; column++){
 //                    System.out.println("row, col " + row + column);
                     char userInput = lines[row].charAt(column);
                     int value  = Character.getNumericValue(userInput);
                     
-//                    // Ignore characters that are not alpha or 0 to 7
-//                    System.out.println("char: " + userInput + " numeric value: " + value);
-//                    
-//                    // char: α numeric value: -1
-//                    if (isSame("α", userInput)){
-//  
-//                        int exponentIndex = column + 1;
-//                        char exponent = lines[row].charAt(exponentIndex);
-//                        if (isSame("α", exponent)){
-//                            value = -1;      // value = -1 is ignored by next function that translates it into a binary format. 
-//                        } else {
-//                            value = Character.getNumericValue(userInput);
-//                        }
-//            
-//                    }
- 
                     // Only allow values from 0 to 7 as exponent.
                     if (value < 0 || value > 7){
                         value = -1;
                     }
                     
-                    System.out.println("exponent updated to: " + value);
+//                    System.out.println("exponent updated to: " + value);
                     userErrors[row][column] = value;
                 }
             }
@@ -985,6 +985,7 @@ public class StartGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JRadioButton jRadioButtonGF2;
     private javax.swing.JRadioButton jRadioButtonGF3;
