@@ -191,23 +191,23 @@ public String printProperties () {
     int errorCorrectionColumn = (this.dColumn -1) /2;
     int errorDetectionColumn = this.dColumn - 1;
     
-    str.append("Rows are sent as: \n");
-    str.append("(n, k, d) --> (" + this.n + " ," + this.k + " ," + this.d + ") codes.\n");
-    str.append("Each row can correct " + errorCorrection + " error(s). \n" );
-    str.append("Each row can detect  "+ errorDetection + " error(s)\n");
-    str.append("Code rate = " + String.format("%.2f", rateSingle) + "\n\n");
+    //str.append("Rows are sent as: \n");
+    //str.append("(n, k, d) --> (" + this.n + " ," + this.k + " ," + this.d + ") codes.\n");
+    //str.append("Each row can correct " + errorCorrection + " error(s). \n" );
+    //str.append("Each row can detect  "+ errorDetection + " error(s)\n");
+    //str.append("Code rate = " + String.format("%.2f", rateSingle) + "\n\n");
     
     if (GF == 2){
-        str.append("Columns are sent as (" + this.nColumn + " ," + this.kColumn + " ," + this.dColumn + ") codes.\n" );
-        str.append("Each column can correct " + errorCorrectionColumn + " error(s)\n");
-        str.append("Each column can detect " + errorDetectionColumn + " error(s)\n");
-        str.append("Code rate = " + String.format("%.2f", rateColumn) + "\n");
+        //str.append("Columns are sent as (" + this.nColumn + " ," + this.kColumn + " ," + this.dColumn + ") codes.\n" );
+        //str.append("Each column can correct " + errorCorrectionColumn + " error(s)\n");
+        //str.append("Each column can detect " + errorDetectionColumn + " error(s)\n");
+        //str.append("Code rate = " + String.format("%.2f", rateColumn) + "\n");
 
-        str.append("\nPRODUCT CODE PROPERTIES:\n" + "(" + this.n * this.nColumn + " ," + this.k * this.kColumn + " ," + this.d * this.dColumn + ")\n" );
+        str.append("PRODUCT CODE PROPERTIES:\n" + "(" + this.n * this.nColumn + " ," + this.k * this.kColumn + " ," + this.d * this.dColumn + ")\n" );
         str.append("Code rate = " + String.format("%.2f", rateProduct) +"\n" );     
     } else {
         float rateEqualProduct =  (float) (this.k * this.k ) / (float) (this.n * this.n);
-        str.append("\nPRODUCT CODE PROPERTIES:\n" + "(" + this.n * this.n + " ," + this.k * this.k + " ," + this.d * this.d + ")\n" );
+        str.append("PRODUCT CODE PROPERTIES:\n" + "(" + this.n * this.n + " ," + this.k * this.k + " ," + this.d * this.d + ")\n" );
         str.append("Code rate = " + String.format("%.2f", rateEqualProduct ) +"\n" );
     }
     
@@ -523,8 +523,10 @@ public String printArray (Integer [][] array){
             }
             str.append(System.getProperty("line.separator"));
     }
-
-    return str.toString();
+    String returnString = str.toString();
+    returnString = returnString.replaceAll("9", "? ");
+    
+    return returnString;
 }
 
 public void setAlphaErrors(Integer[][] userErrors){
@@ -692,6 +694,7 @@ public String getAlphaString(Integer[][] array){
                     nGram = nGram.replaceAll("111", "α⁵\t");
                     nGram = nGram.replaceAll("101", "α⁶\t");
                     nGram = nGram.replaceAll("100", "α⁷\t");
+                    nGram = nGram.replaceAll("999", "?\t\t");
 
                     str.append(nGram);
 
@@ -753,11 +756,11 @@ public void fillProbability (double p) {
     }
 }
 
-public void fillGilbert(double pGG, double pBB){
+public void fillGilbert(double pGG, double pBB, double errorG, double errorB){
     int columns = CW[0].length;
     int rows = CWColumn[0].length;
     Sent = new Integer [rows][columns];
-    
+        
     // Initialize Sent to zero. 
     for (Integer [] row : Sent){
                 Arrays.fill(row, 0);
@@ -777,18 +780,27 @@ public void fillGilbert(double pGG, double pBB){
                 case 0: if (chance <= 1 - pBB) goodState = 1;
                 break;  
             }
-            // Use new state to input errors
-            if (goodState == 0) {
+            
+            // ERROR STATE
+            if ((GF != 3) && (goodState == 0) && (chance < errorB) ) {
                 Sent1[j] = 1;
             }
             
-            // If GF3 then erros may be 0,1 or 2
-            if (goodState == 0 && this.GF == 3){
-                int result = 1;
-                if (chance < 0.5) { result = 2;}
-               
-                Sent1[j] = result;
+            if ((GF == 3) && (goodState == 0) && (chance < errorB) ) {
+                int GF2_chance = 1 + (int)(Math.random() * ((2 - 1) + 1));
+                Sent1[j] = GF2_chance;
+            }            
+ 
+            // GOOD STATE
+            if ((GF != 3) && (goodState == 1) && (chance <= errorG)) {
+                Sent1[j] = 1;
             }
+            
+            if ((GF == 3) && (goodState == 1) && (chance <= errorG)) {
+                int GF2_chance = 1 + (int)(Math.random() * ((2 - 1) + 1));
+                Sent1[j] = GF2_chance;
+            }
+            
             
         }
     }
@@ -852,7 +864,6 @@ public int compareRow (int index) {
         Collections.sort(list, new WeightComp());
         int result = list.get(0).getIndexOfCW();
         return result;
-  
 }
 
 public int compareColumn (int column) {
@@ -867,7 +878,7 @@ public int compareColumn (int column) {
                 // FOR each row loop through columns in CW 
                 for (int j = 0; j < rowsSent; j++){
 
-                        if (CWColumn[i][j] != Sent[j][column]){
+                        if (CWColumn[i][j] != Sent[j][column] && Sent[j][column] != 9){
                                 diff++;
                         }	
                 }
@@ -876,9 +887,7 @@ public int compareColumn (int column) {
         }
 
         Collections.sort(list, new WeightComp());
-        //for (Difference objDiff : list){
-        //	System.out.println("index = " + objDiff.getIndexOfCW() + " weight = " +  objDiff.getWeight());
-        //}
+  
         int result = list.get(0).getIndexOfCW();
         return result;		
 }
@@ -911,6 +920,46 @@ public void columnDecode () {
                     Sent[j][i] = CWColumn[column][j];
             }
     }
+}
+
+public void erasureRow() {
+    int index;
+    int rows = Sent.length;
+    int columns = Sent[0].length;
+    boolean foundError = false;
+    
+    for (int i = 0; i < rows; i++){
+        foundError = false;
+        if (checkCW(Sent[i]) != 1) foundError = true;   
+        
+        // Set rows to 9 in case of error.
+        if (foundError == true) {
+            for (int j = 0; j < columns; j++){
+                Sent[i][j] = 9;
+            }
+        }
+    }
+    
+}
+
+public int checkCW(Integer[] row){
+    
+    int cwFound = 0;
+    int matches = 0;
+    Integer[] CWRow;
+    
+    for (int i=0; i<CW.length; i++){
+        CWRow = CW[i];
+        matches = 0;
+        
+        if (Arrays.toString(CWRow).equals(Arrays.toString(row))){
+            cwFound = 1;
+//            System.out.println("Found CW: " +  Arrays.toString(CWRow));
+        }     
+    }
+  
+    return cwFound;
+    
 }
 
 }
