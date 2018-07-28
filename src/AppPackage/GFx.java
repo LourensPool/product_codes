@@ -775,9 +775,9 @@ public void fillGilbert(double pGG, double pBB, double errorG, double errorB){
             double chance = Math.random();
             
             switch (goodState) {
-                case 1:  if (chance <= 1 - pGG) goodState = 0;
+                case 1:  if (chance < 1 - pGG) goodState = 0;
                 break;
-                case 0: if (chance <= 1 - pBB) goodState = 1;
+                case 0: if (chance < 1 - pBB) goodState = 1;
                 break;  
             }
             
