@@ -1,7 +1,7 @@
 # How to start the java-app 
 Open file: \dist\product_codes.jar
 
-# Note:
+# Note
 The UI has a bug for GF2, so (at the top left) only select GF3 or GF8 for now.
 
 # Application which visually explains product codes (Individual project)
