@@ -2,7 +2,7 @@
 Open file: \dist\product_codes.jar
 
 # Note:
-The UI has a bug for GF2, so only select GF3 or GF8 for now.
+The UI has a bug for GF2, so (at the top left) only select GF3 or GF8 for now.
 
 # Application which visually explains product codes (Individual project)
 When streaming digital information over a non-digital medium, errors can be introduced; for example when reading a CD or making a phone call.
