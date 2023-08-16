@@ -1,3 +1,6 @@
+# How to start the java-app 
+Open file: \dist\product_codes.jar
+
 # Application which visually explains product codes (Individual project)
 When streaming digital information over a non-digital medium, errors can be introduced; for example when reading a CD or making a phone call.
 
